@@ -2,24 +2,25 @@ package app.egghunt
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.view.animation.BounceInterpolator
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.roundToLong
 
 
 class WelcomeActivity : AppCompatActivity() {
-    @Suppress("UNUSED_PARAMETER")
-    fun onClickButton(view: View) {
-        Toast.makeText(this, "clicked", Toast.LENGTH_LONG).show();
-    }
+    private lateinit var menu: PopupMenu;
 
     @Suppress("UNUSED_PARAMETER")
-    fun onClickMenu(view: View) {
-        Toast.makeText(this, "clicked", Toast.LENGTH_LONG).show();
+    fun onClickButton(view: View) {
+        val intent = Intent(this, ScanActivity::class.java)
+
+        startActivity(intent)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,10 +44,6 @@ class WelcomeActivity : AppCompatActivity() {
             startRotation(egg)
             startTranslation(egg)
         }}
-
-        // Initialize the menu.
-
-        findViewById<View>(R.id.menu).setOnClickListener(this::onClickMenu)
     }
 
     private fun startRotation(egg: View) {

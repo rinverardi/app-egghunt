@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="app.egghunt">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="app.egghunt">
+    <uses-feature android:name="android.hardware.camera"  android:required="true"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+
+    <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
         android:allowBackup="true"
@@ -9,7 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EggHunt">
+
         <activity
+            android:label="@string/activity_scan"
+            android:name=".ScanActivity"
+            android:parentActivityName=".WelcomeActivity"
+            android:theme="@style/Theme.EggHunt"/>
+
+        <activity
+            android:label="@string/activity_welcome"
             android:name=".WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.EggHunt.Welcome">
@@ -20,5 +31,4 @@
             </intent-filter>
         </activity>
     </application>
-
 </manifest>
