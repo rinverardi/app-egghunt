@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <string name="activity_competition_details">Competition details</string>
+    <string name="activity_egg_details">Egg details</string>
+    <string name="activity_hunter_details">Hunter details</string>
     <string name="activity_scan">Scan a code</string>
-    <string name="activity_welcome">Egg Hunt</string>
+    <string name="activity_welcome">Welcome</string>
     <string name="app_name">Egg Hunt</string>
     <string name="button_scan">Scan a code</string>
     <string name="title_welcome0">Welcome to the egg hunt!</string>

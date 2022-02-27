@@ -17,15 +17,33 @@
         android:theme="@style/Theme.EggHunt">
 
         <activity
+            android:label="@string/activity_competition_details"
+            android:name=".activity.CompetitionDetailsActivity"
+            android:parentActivityName=".activity.WelcomeActivity"
+            android:theme="@style/Theme.EggHunt"/>
+
+        <activity
+            android:label="@string/activity_egg_details"
+            android:name=".activity.EggDetailsActivity"
+            android:parentActivityName=".activity.WelcomeActivity"
+            android:theme="@style/Theme.EggHunt"/>
+
+        <activity
+            android:label="@string/activity_hunter_details"
+            android:name=".activity.HunterDetailsActivity"
+            android:parentActivityName=".activity.WelcomeActivity"
+            android:theme="@style/Theme.EggHunt"/>
+
+        <activity
             android:label="@string/activity_scan"
-            android:name=".ScanActivity"
-            android:parentActivityName=".WelcomeActivity"
+            android:name=".activity.ScanActivity"
+            android:parentActivityName=".activity.WelcomeActivity"
             android:theme="@style/Theme.EggHunt"/>
 
         <activity
             android:exported="true"
             android:label="@string/activity_welcome"
-            android:name=".WelcomeActivity"
+            android:name=".activity.WelcomeActivity"
             android:theme="@style/Theme.EggHunt.Welcome">
 
             <intent-filter>

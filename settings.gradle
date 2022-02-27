@@ -13,6 +13,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 
+        // https://github.com/yuriy-budiyev/code-scanner
+
         maven {
             url 'https://jitpack.io'
         }
