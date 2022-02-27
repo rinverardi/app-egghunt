@@ -7,15 +7,10 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.BounceInterpolator
 import android.widget.ImageView
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlin.math.roundToLong
 
-
 class WelcomeActivity : AppCompatActivity() {
-    private lateinit var menu: PopupMenu;
-
     @Suppress("UNUSED_PARAMETER")
     fun onClickButton(view: View) {
         val intent = Intent(this, ScanActivity::class.java)
@@ -47,7 +42,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun startRotation(egg: View) {
-        val rotate = ObjectAnimator.ofFloat(egg, "rotation", -20f, 20f)
+        val rotate = ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)
 
         rotate.duration = (5000 + Math.random() * 1000).roundToLong()
         rotate.repeatCount = ValueAnimator.INFINITE
@@ -56,7 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun startTranslation(egg: View) {
-        val translate = ObjectAnimator.ofFloat(egg, "translationY", -300f, 0f)
+        val translate = ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)
 
         translate.interpolator = BounceInterpolator()
         translate.duration = (2000 + Math.random() * 1000).roundToLong()
