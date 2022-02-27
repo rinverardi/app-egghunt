@@ -5,4 +5,6 @@
     <string name="activity_welcome">Egg Hunt</string>
     <string name="app_name">Egg Hunt</string>
     <string name="button_scan">Scan a code</string>
+    <string name="title_welcome0">Welcome to the egg hunt!</string>
+    <string name="title_welcome1">Get started by scanning a code.</string>
 </resources>
