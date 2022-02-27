@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=EC407A
+    -->
+
+    <color name="primaryColor">#ec407a</color>
+    <color name="primaryDarkColor">#b4004e</color>
+    <color name="primaryLightColor">#ff77a9</color>
+
+    <!--
+    https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=DCE775
+    -->
+
+    <color name="secondaryColor">#dce775</color>
+    <color name="secondaryDarkColor">#a8b545</color>
+    <color name="secondaryLightColor">#ffffa6</color>
+
+    <color name="black">#ff000000</color>
+    <color name="gray">#ffe0e0e0</color>
+    <color name="white">#ffffffff</color>
+</resources>
