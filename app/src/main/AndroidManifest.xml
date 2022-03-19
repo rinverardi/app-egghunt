@@ -6,6 +6,7 @@
 
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
+
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
@@ -16,34 +17,23 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.EggHunt">
 
-        <activity
-            android:label="@string/activity_competition_details"
-            android:name=".activity.CompetitionDetailsActivity"
-            android:parentActivityName=".activity.WelcomeActivity"
-            android:theme="@style/Theme.EggHunt"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
 
         <activity
-            android:label="@string/activity_egg_details"
-            android:name=".activity.EggDetailsActivity"
-            android:parentActivityName=".activity.WelcomeActivity"
-            android:theme="@style/Theme.EggHunt"/>
+            android:name=".activity.MapActivity"
+            android:exported="false"
+            android:label="@string/activity_map"/>
 
         <activity
-            android:label="@string/activity_hunter_details"
-            android:name=".activity.HunterDetailsActivity"
-            android:parentActivityName=".activity.WelcomeActivity"
-            android:theme="@style/Theme.EggHunt"/>
-
-        <activity
-            android:label="@string/activity_scan"
             android:name=".activity.ScanActivity"
+            android:label="@string/activity_scan"
             android:parentActivityName=".activity.WelcomeActivity"
             android:theme="@style/Theme.EggHunt"/>
 
         <activity
+            android:name=".activity.WelcomeActivity"
             android:exported="true"
             android:label="@string/activity_welcome"
-            android:name=".activity.WelcomeActivity"
             android:theme="@style/Theme.EggHunt.Welcome">
 
             <intent-filter>

@@ -17,23 +17,25 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.egghunt.R
 import app.egghunt.code.Code
+import app.egghunt.dialog.ErrorDialog
 import com.google.gson.Gson
 import kotlin.math.roundToLong
 
 class WelcomeActivity : AppCompatActivity() {
-    private val scanLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val codeString = result.data!!.getStringExtra(Intent.EXTRA_TEXT)
+    private val scanLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val codeString = result.data!!.getStringExtra(Intent.EXTRA_TEXT)
 
-            val code = Gson().fromJson(codeString, Code::class.java)
+                val code = Gson().fromJson(codeString, Code::class.java)
 
-            when {
-                code.et != null -> onScanEgg(code)
-                code.ht != null -> onScanHunter(code)
-                else -> onScanCompetition(code)
+                when {
+                    code.et != null -> onScanEgg()
+                    code.ht != null -> onScanHunter(code)
+                    else -> onScanCompetition(code)
+                }
             }
         }
-    }
 
     @Suppress("UNUSED_PARAMETER")
     fun onClickButton(view: View) {
@@ -79,48 +81,51 @@ class WelcomeActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(
         code: Int,
         permissions: Array<String?>,
-        results: IntArray) {
+        results: IntArray
+    ) {
 
         super.onRequestPermissionsResult(code, permissions, results)
 
         if (code == REQUEST_PERMISSION) {
             if (results[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast
+                    .makeText(this, R.string.toast_camera_access_granted, Toast.LENGTH_SHORT)
+                    .show()
+
                 scan()
             } else {
                 Toast
-                    .makeText(this, "Camera permission denied", Toast.LENGTH_SHORT)
+                    .makeText(this, R.string.toast_camera_access_denied, Toast.LENGTH_SHORT)
                     .show()
             }
         }
     }
 
     private fun onScanCompetition(code: Code) {
-        val intent = Intent(this, CompetitionDetailsActivity::class.java)
+        val intent = Intent(this, MapActivity::class.java)
 
-        intent.putExtra(CompetitionDetailsActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(CompetitionDetailsActivity.EXTRA_COMPETITION_TAG, code.ct)
+        intent.putExtra(MapActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(MapActivity.EXTRA_COMPETITION_TAG, code.ct)
 
         startActivity(intent)
     }
 
-    private fun onScanEgg(code: Code) {
-        val intent = Intent(this, EggDetailsActivity::class.java)
+    private fun onScanEgg() {
+        val dialog = ErrorDialog(
+            R.string.error_message_unexpected_egg_code,
+            R.string.error_title
+        )
 
-        intent.putExtra(EggDetailsActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(EggDetailsActivity.EXTRA_COMPETITION_TAG, code.ct)
-        intent.putExtra(EggDetailsActivity.EXTRA_EGG_DESCRIPTION, code.ed)
-        intent.putExtra(EggDetailsActivity.EXTRA_EGG_TAG, code.et)
-
-        startActivity(intent)
+        dialog.show(supportFragmentManager, null)
     }
 
     private fun onScanHunter(code: Code) {
-        val intent = Intent(this, HunterDetailsActivity::class.java)
+        val intent = Intent(this, MapActivity::class.java)
 
-        intent.putExtra(HunterDetailsActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(HunterDetailsActivity.EXTRA_COMPETITION_TAG, code.ct)
-        intent.putExtra(HunterDetailsActivity.EXTRA_HUNTER_DESCRIPTION, code.hd)
-        intent.putExtra(HunterDetailsActivity.EXTRA_HUNTER_TAG, code.ht)
+        intent.putExtra(MapActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(MapActivity.EXTRA_COMPETITION_TAG, code.ct)
+        intent.putExtra(MapActivity.EXTRA_HUNTER_DESCRIPTION, code.hd)
+        intent.putExtra(MapActivity.EXTRA_HUNTER_TAG, code.ht)
 
         startActivity(intent)
     }
@@ -137,6 +142,7 @@ class WelcomeActivity : AppCompatActivity() {
         rotate.duration = (5000 + Math.random() * 1000).roundToLong()
         rotate.repeatCount = ValueAnimator.INFINITE
         rotate.repeatMode = ValueAnimator.REVERSE
+
         rotate.start()
     }
 
@@ -147,6 +153,7 @@ class WelcomeActivity : AppCompatActivity() {
         translate.duration = (2000 + Math.random() * 1000).roundToLong()
         translate.repeatCount = ValueAnimator.INFINITE
         translate.repeatMode = ValueAnimator.REVERSE
+
         translate.start()
     }
 
