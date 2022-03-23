@@ -10,7 +10,10 @@ object Data {
         return FirebaseDatabase.getInstance(url)
     }
 
-    fun syncCompetition(competitionDescription: String, competitionTag: String): DatabaseReference {
+    fun syncCompetition(
+        competitionDescription: String,
+        competitionTag: String,
+    ): DatabaseReference {
         val reference = open().getReference("competition/$competitionTag")
 
         reference.child("description").setValue(competitionDescription)
