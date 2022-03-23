@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "362739648826",
+    "project_id": "egg-hunt-344616",
+    "storage_bucket": "egg-hunt-344616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:362739648826:android:c5e45dc9ecef89f3626803",
+        "android_client_info": {
+          "package_name": "app.egghunt"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "362739648826-mpb58lb4ct9pb4us7me7c19mvfr9mi30.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv9P4RyrNrtvKNcnJS2YDKNjd1vsuxVVc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "362739648826-mpb58lb4ct9pb4us7me7c19mvfr9mi30.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

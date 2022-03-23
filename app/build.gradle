@@ -2,6 +2,10 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
 
+    // Google Firebase
+
+    id 'com.google.gms.google-services'
+
     // Google Maps
 
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
@@ -54,6 +58,14 @@ dependencies {
     // Code Scanner
 
     implementation 'com.github.yuriy-budiyev:code-scanner:2.1.1'
+
+    // Google Firebase
+
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.firebase:firebase-database-ktx'
+    implementation 'com.google.firebase:firebase-messaging-ktx'
 
     // Google Maps
 
