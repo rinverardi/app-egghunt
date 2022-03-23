@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="activity_map">The map</string>
+    <string name="activity_hunter">Hunter</string>
+    <string name="activity_organizer">Organizer</string>
     <string name="activity_scan">Scan a code</string>
     <string name="activity_welcome">Egg Hunt</string>
     <string name="app_name">Egg Hunt</string>

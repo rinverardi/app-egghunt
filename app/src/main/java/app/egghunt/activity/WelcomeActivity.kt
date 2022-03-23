@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.egghunt.R
 import app.egghunt.code.Code
+import app.egghunt.code.CodeValidator
 import app.egghunt.dialog.ErrorDialog
 import com.google.gson.Gson
 import kotlin.math.roundToLong
@@ -28,6 +29,8 @@ class WelcomeActivity : AppCompatActivity() {
                 val codeString = result.data!!.getStringExtra(Intent.EXTRA_TEXT)
 
                 val code = Gson().fromJson(codeString, Code::class.java)
+
+                CodeValidator.validate(code)
 
                 when {
                     code.et != null -> onScanEgg()
@@ -102,12 +105,13 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onScanCompetition(code: Code) {
-        val intent = Intent(this, MapActivity::class.java)
+        val intent = Intent(this, OrganizerActivity::class.java)
 
-        intent.putExtra(MapActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(MapActivity.EXTRA_COMPETITION_TAG, code.ct)
+        intent.putExtra(OrganizerActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(OrganizerActivity.EXTRA_COMPETITION_TAG, code.ct)
 
         startActivity(intent)
+        finish()
     }
 
     private fun onScanEgg() {
@@ -120,14 +124,15 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onScanHunter(code: Code) {
-        val intent = Intent(this, MapActivity::class.java)
+        val intent = Intent(this, HunterActivity::class.java)
 
-        intent.putExtra(MapActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(MapActivity.EXTRA_COMPETITION_TAG, code.ct)
-        intent.putExtra(MapActivity.EXTRA_HUNTER_DESCRIPTION, code.hd)
-        intent.putExtra(MapActivity.EXTRA_HUNTER_TAG, code.ht)
+        intent.putExtra(HunterActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(HunterActivity.EXTRA_COMPETITION_TAG, code.ct)
+        intent.putExtra(HunterActivity.EXTRA_HUNTER_DESCRIPTION, code.hd)
+        intent.putExtra(HunterActivity.EXTRA_HUNTER_TAG, code.ht)
 
         startActivity(intent)
+        finish()
     }
 
     private fun scan() {

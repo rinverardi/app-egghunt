@@ -3,7 +3,7 @@ package app.egghunt.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import app.egghunt.R
-import app.egghunt.databinding.ActivityMapBinding
+import app.egghunt.databinding.ActivityOrganizerBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -11,16 +11,16 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+class OrganizerActivity : AppCompatActivity(), OnMapReadyCallback {
+    private lateinit var binding: ActivityOrganizerBinding
     private lateinit var map: GoogleMap
-    private lateinit var mapBinding: ActivityMapBinding
 
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
 
-        mapBinding = ActivityMapBinding.inflate(layoutInflater)
+        binding = ActivityOrganizerBinding.inflate(layoutInflater)
 
-        setContentView(mapBinding.root)
+        setContentView(binding.root)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
 
@@ -39,7 +39,5 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     companion object {
         const val EXTRA_COMPETITION_DESCRIPTION = "competition_description"
         const val EXTRA_COMPETITION_TAG = "competition_tag"
-        const val EXTRA_HUNTER_DESCRIPTION = "hunter_description"
-        const val EXTRA_HUNTER_TAG = "hunter_tag"
     }
 }

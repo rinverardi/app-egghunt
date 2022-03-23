@@ -20,9 +20,12 @@
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
 
         <activity
-            android:name=".activity.MapActivity"
-            android:exported="false"
-            android:label="@string/activity_map"/>
+            android:name=".activity.HunterActivity"
+            android:label="@string/activity_hunter"/>
+
+        <activity
+            android:name=".activity.OrganizerActivity"
+            android:label="@string/activity_organizer"/>
 
         <activity
             android:name=".activity.ScanActivity"
