@@ -3,10 +3,30 @@
 <LinearLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".activity.HunterActivity"
+    android:orientation="vertical"
+    tools:context=".hunter.HunterActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- @remo Implement me! -->
+    <androidx.appcompat.widget.Toolbar
+        android:background="@color/primaryColor"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_width="match_parent"
+        app:title="@string/activity_hunter"
+        app:titleTextColor="@color/white"/>
 
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/primaryColor"
+        app:tabIndicatorColor="@color/white"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/gray1"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/pager"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
 </LinearLayout>

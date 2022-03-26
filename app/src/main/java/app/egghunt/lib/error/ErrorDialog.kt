@@ -1,4 +1,4 @@
-package app.egghunt.dialog
+package app.egghunt.lib.error
 
 import android.app.AlertDialog
 import android.app.Dialog

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:background="@color/gray2"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    tools:context=".hunter.HunterActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- @remo Design me! -->
+
+    <Button
+        android:id="@+id/button_find"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin2"
+        android:layout_width="match_parent"
+        android:padding="@dimen/padding"
+        android:text="@string/button_find"/>
+
+    <Button
+        android:id="@+id/button_hide"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin2"
+        android:layout_width="match_parent"
+        android:padding="@dimen/padding"
+        android:text="@string/button_hide"/>
+</LinearLayout>

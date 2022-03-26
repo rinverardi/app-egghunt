@@ -1,8 +1,9 @@
-package app.egghunt.activity
+package app.egghunt.action.scan
 
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import app.egghunt.R
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -20,9 +21,15 @@ class ScanActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_scan)
 
+        // Initialize the action bar.
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        setTitle(intent.getIntExtra(EXTRA_TITLE, R.string.activity_scan))
+
         // Initialize the scanner.
 
-        scanner = CodeScanner(this, findViewById(R.id.preview))
+        scanner = CodeScanner(this, findViewById(R.id.scanner))
 
         scanner.autoFocusMode = AutoFocusMode.SAFE
         scanner.camera = CodeScanner.CAMERA_BACK
@@ -45,6 +52,16 @@ class ScanActivity : AppCompatActivity() {
         scanner.scanMode = ScanMode.SINGLE
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
 
@@ -55,5 +72,9 @@ class ScanActivity : AppCompatActivity() {
         scanner.releaseResources()
 
         super.onPause()
+    }
+
+    companion object {
+        const val EXTRA_TITLE = "title"
     }
 }

@@ -1,4 +1,4 @@
-package app.egghunt.data
+package app.egghunt.lib.data
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

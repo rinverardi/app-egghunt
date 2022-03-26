@@ -3,25 +3,54 @@
 <FrameLayout
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    tools:context=".activity.ScanActivity"
+    tools:context=".action.scan.ScanActivity"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/preview"
+        android:id="@+id/scanner"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        app:autoFocusButtonColor="@android:color/white"
+        app:autoFocusButtonColor="@color/white"
         app:autoFocusButtonVisible="true"
-        app:flashButtonColor="@android:color/white"
+        app:flashButtonColor="@color/white"
         app:flashButtonVisible="true"
         app:frameAspectRatioHeight="1"
         app:frameAspectRatioWidth="1"
-        app:frameColor="@android:color/white"
+        app:frameColor="@color/white"
         app:frameCornersRadius="0dp"
         app:frameCornersSize="50dp"
         app:frameSize="0.75"
         app:frameThickness="2dp"
         app:maskColor="#77000000"/>
+
+    <!-- @remo Remove me! -->
+
+    <LinearLayout
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content">
+
+        <Button
+            android:id="@+id/c"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin1"
+            android:layout_width="wrap_content"
+            android:text="C"/>
+
+        <Button
+            android:id="@+id/e"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin1"
+            android:layout_width="wrap_content"
+            android:text="E"/>
+
+        <Button
+            android:id="@+id/h"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin1"
+            android:layout_width="wrap_content"
+            android:text="H"/>
+    </LinearLayout>
 </FrameLayout>

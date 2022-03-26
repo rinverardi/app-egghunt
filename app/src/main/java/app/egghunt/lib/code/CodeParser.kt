@@ -1,6 +1,8 @@
-package app.egghunt.code
+package app.egghunt.lib.code
 
-object CodeValidator {
+import com.google.gson.Gson
+
+object CodeParser {
     private fun checkDescription(name: String, value: String?) {
         if (value != null) {
             if (value.length > 30) {
@@ -17,12 +19,16 @@ object CodeValidator {
         }
     }
 
-    fun validate(code: Code) {
+    fun parse(codeString: String): Code {
+        val code = Gson().fromJson(codeString, Code::class.java)
+
         checkDescription("cd", code.cd)
         checkTag("ct", code.ct)
         checkDescription("ed", code.ed)
         checkTag("et", code.et)
         checkDescription("hd", code.hd)
         checkTag("ht", code.ht)
+
+        return code
     }
 }

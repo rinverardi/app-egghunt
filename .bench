@@ -1,0 +1,3 @@
+setEnvironmentVariable STUDIO ~/opt/android-studio/bin/studio.sh
+
+checkFile $STUDIO

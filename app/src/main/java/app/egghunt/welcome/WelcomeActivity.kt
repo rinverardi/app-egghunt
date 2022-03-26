@@ -1,4 +1,4 @@
-package app.egghunt.activity
+package app.egghunt.welcome
 
 import android.Manifest
 import android.animation.ObjectAnimator
@@ -16,9 +16,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.egghunt.R
-import app.egghunt.code.Code
-import app.egghunt.code.CodeValidator
-import app.egghunt.dialog.ErrorDialog
+import app.egghunt.action.scan.ScanActivity
+import app.egghunt.hunter.HunterActivity
+import app.egghunt.lib.code.Code
+import app.egghunt.lib.code.CodeParser
+import app.egghunt.lib.error.ErrorDialog
+import app.egghunt.organizer.OrganizerActivity
 import com.google.gson.Gson
 import kotlin.math.roundToLong
 
@@ -26,15 +29,13 @@ class WelcomeActivity : AppCompatActivity() {
     private val scanLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val codeString = result.data!!.getStringExtra(Intent.EXTRA_TEXT)
+                val codeString = result.data!!.getStringExtra(Intent.EXTRA_TEXT)!!
 
-                val code = Gson().fromJson(codeString, Code::class.java)
-
-                CodeValidator.validate(code)
+                val code = CodeParser.parse(codeString)
 
                 when {
-                    code.et != null -> onScanEgg()
-                    code.ht != null -> onScanHunter(code)
+                    code.isEgg() -> onScanEgg()
+                    code.isHunter() -> onScanHunter(code)
                     else -> onScanCompetition(code)
                 }
             }
