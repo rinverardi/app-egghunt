@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
@@ -74,6 +75,14 @@ class HunterActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, pager) { tab, tabPosition ->
             tab.text = resources.getStringArray(R.array.tabs_hunter)[tabPosition]
         }.attach()
+
+        // Initialize the toolbar.
+
+        val hunter = intent.getStringExtra(EXTRA_HUNTER_DESCRIPTION)
+
+        if (hunter != null && hunter.isNotEmpty()) {
+            findViewById<Toolbar>(R.id.toolbar)!!.title = hunter
+        }
     }
 
     private fun onScanCompetition() {

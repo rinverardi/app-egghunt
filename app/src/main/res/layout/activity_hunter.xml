@@ -11,6 +11,7 @@
 
     <androidx.appcompat.widget.Toolbar
         android:background="@color/primaryColor"
+        android:id="@+id/toolbar"
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
         app:title="@string/activity_hunter"
