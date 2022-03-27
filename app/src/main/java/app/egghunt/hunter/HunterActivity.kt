@@ -87,21 +87,34 @@ class HunterActivity : AppCompatActivity() {
 
     private fun onScanCompetition() {
         val dialog = Popup(
-            R.string.error_message_unexpected_competition_code,
-            R.string.error_title
+            R.string.error_message_unexpected_competition,
+            R.string.error_title_oops
         )
 
         dialog.show(supportFragmentManager, null)
     }
 
-    // @remo Implement me!
+    private fun onScanEgg(code: Code) {
+        val competitionTag = intent.getStringExtra(EXTRA_COMPETITION_TAG)!!
 
-    private fun onScanEgg(code: Code) {}
+        if (competitionTag != code.ct) {
+            val dialog = Popup(
+                R.string.error_message_different_competition,
+                R.string.error_title_psst
+            )
+
+            dialog.show(supportFragmentManager, null)
+            return
+        }
+
+        // @remo Implement me!
+
+    }
 
     private fun onScanHunter() {
         val dialog = Popup(
-            R.string.error_message_unexpected_hunter_code,
-            R.string.error_title
+            R.string.error_message_unexpected_hunter,
+            R.string.error_title_oops
         )
 
         dialog.show(supportFragmentManager, null)

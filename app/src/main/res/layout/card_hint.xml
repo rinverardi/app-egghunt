@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_l"
-    android:layout_marginTop="@dimen/margin_l"
+    android:layout_marginVertical="@dimen/margin_s"
     android:layout_width="match_parent"
     app:cardCornerRadius="@dimen/radius"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,20 +11,33 @@
 
     <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_l">
+        android:layout_width="match_parent">
 
         <TextView
-            android:id="@+id/text"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_l"
+            android:layout_marginTop="@dimen/margin_l"
+            android:layout_width="wrap_content"
+            android:text="💡"
+            tools:ignore="HardcodedText"/>
+
+        <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textStyle="bold"/>
+            android:orientation="vertical"
+            android:padding="@dimen/padding_l">
 
-        <TextView
-            android:id="@+id/posted_at"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_s"
-            android:layout_width="match_parent"/>
+            <TextView
+                android:id="@+id/text"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/posted_at"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_width="match_parent"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

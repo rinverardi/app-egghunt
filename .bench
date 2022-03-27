@@ -1,3 +1,19 @@
+setEnvironmentVariable ANDROID_HOME ~/opt/android-sdk
+setEnvironmentVariable GRADLE_HOME ~/opt/gradle
+setEnvironmentVariable GRADLE_OPTS -Dorg.gradle.daemon=true
+setEnvironmentVariable JAVA_HOME ~/opt/jdk
+setEnvironmentVariable QEMU_AUDIO_DRV none
 setEnvironmentVariable STUDIO ~/opt/android-studio/bin/studio.sh
+
+appendEnvironmentVariable LD_LIBRARY_PATH : "$ANDROID_HOME/tools/lib64"
+
+appendEnvironmentVariable PATH : "$ANDROID_HOME/tools"
+appendEnvironmentVariable PATH : "$ANDROID_HOME/platform-tools"
+appendEnvironmentVariable PATH : "$GRADLE_HOME/bin"
+appendEnvironmentVariable PATH : "$JAVA_HOME/bin"
+
+checkDirectory $ANDROID_HOME
+checkDirectory $GRADLE_HOME
+checkDirectory $JAVA_HOME
 
 checkFile $STUDIO

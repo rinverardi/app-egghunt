@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <dimen name="height">4dp</dimen>
+    <dimen name="height">5dp</dimen>
 
-    <dimen name="margin_s">8dp</dimen>
-    <dimen name="margin_l">16dp</dimen>
+    <dimen name="margin_s">7dp</dimen>
+    <dimen name="margin_m">10.5dp</dimen>
+    <dimen name="margin_l">14dp</dimen>
 
-    <dimen name="padding_s">8dp</dimen>
-    <dimen name="padding_l">16dp</dimen>
+    <dimen name="padding_s">7dp</dimen>
+    <dimen name="padding_m">10.5dp</dimen>
+    <dimen name="padding_l">14dp</dimen>
 
-    <dimen name="radius">4dp</dimen>
+    <dimen name="radius">3dp</dimen>
 </resources>

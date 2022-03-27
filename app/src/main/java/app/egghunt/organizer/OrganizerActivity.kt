@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
+import app.egghunt.hunter.HunterActivity
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
 import app.egghunt.lib.Data
@@ -92,14 +93,26 @@ class OrganizerActivity : AppCompatActivity() {
 
     private fun onScanCompetition() {
         val dialog = Popup(
-            R.string.error_message_unexpected_competition_code,
-            R.string.error_title
+            R.string.error_message_unexpected_competition,
+            R.string.error_title_oops
         )
 
         dialog.show(supportFragmentManager, null)
     }
 
     private fun onScanEgg(code: Code) {
+        val competitionTag = intent.getStringExtra(HunterActivity.EXTRA_COMPETITION_TAG)!!
+
+        if (competitionTag != code.ct) {
+            val dialog = Popup(
+                R.string.error_message_different_competition,
+                R.string.error_title_psst
+            )
+
+            dialog.show(supportFragmentManager, null)
+            return
+        }
+
         val egg = competitionReference.child("egg").child(code.et!!)
 
         egg.child("description").setValue(code.ed)
@@ -108,8 +121,8 @@ class OrganizerActivity : AppCompatActivity() {
 
     private fun onScanHunter() {
         val dialog = Popup(
-            R.string.error_message_unexpected_hunter_code,
-            R.string.error_title
+            R.string.error_message_unexpected_hunter,
+            R.string.error_title_oops
         )
 
         dialog.show(supportFragmentManager, null)

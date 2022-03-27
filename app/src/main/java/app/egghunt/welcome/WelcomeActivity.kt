@@ -116,8 +116,8 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun onScanEgg() {
         val dialog = Popup(
-            R.string.error_message_unexpected_egg_code,
-            R.string.error_title
+            R.string.error_message_unexpected_egg,
+            R.string.error_title_oops
         )
 
         dialog.show(supportFragmentManager, null)

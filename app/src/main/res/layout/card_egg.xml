@@ -3,21 +3,35 @@
 <androidx.cardview.widget.CardView
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_l"
-    android:layout_marginTop="@dimen/margin_l"
+    android:layout_marginVertical="@dimen/margin_s"
     android:layout_width="match_parent"
     app:cardCornerRadius="@dimen/radius"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:padding="@dimen/padding_l">
+        android:layout_width="match_parent">
 
-        <TextView
-            android:id="@+id/description"
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_l"
+        android:layout_marginTop="@dimen/margin_l"
+        android:layout_width="wrap_content"
+        android:text="🥚"
+        tools:ignore="HardcodedText"/>
+
+        <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:textStyle="bold"/>
+            android:padding="@dimen/padding_l">
+
+            <TextView
+                android:id="@+id/description"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:textStyle="bold"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
