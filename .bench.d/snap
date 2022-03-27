@@ -1,0 +1,36 @@
+#! /bin/bash
+
+set -e
+
+function help() {
+  echo "Usage: $0 [-s {device}] {query}"
+  exit 1
+}
+
+ADB=adb
+
+while getopts s: option
+do
+  case $option in
+    s)
+      ADB+=" -s $OPTARG"
+      ;;
+
+    *)
+      help
+      ;;
+  esac
+done
+
+shift $((OPTIND - 1))
+
+# Check if the debug bridge works.
+
+$ADB shell true
+
+# Take a screenshot.
+
+$ADB shell screencap -p /sdcard/snap.png
+$ADB pull /sdcard/snap.png /tmp/snap.png
+
+gimp /tmp/snap.png >& /dev/null &
