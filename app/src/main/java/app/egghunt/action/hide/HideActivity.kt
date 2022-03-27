@@ -1,6 +1,7 @@
 package app.egghunt.action.hide
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import app.egghunt.R
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -18,6 +19,10 @@ class HideActivity : AppCompatActivity(), OnMapReadyCallback {
 
         setContentView(R.layout.activity_hide)
 
+        // Initialize the action bar.
+
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         // Initialize the map.
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
@@ -34,5 +39,14 @@ class HideActivity : AppCompatActivity(), OnMapReadyCallback {
 
         this.map.addMarker(MarkerOptions().position(position))
         this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
 }

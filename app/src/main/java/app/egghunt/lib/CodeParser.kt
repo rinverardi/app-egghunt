@@ -1,4 +1,4 @@
-package app.egghunt.lib.code
+package app.egghunt.lib
 
 import com.google.gson.Gson
 

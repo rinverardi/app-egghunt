@@ -1,7 +1,8 @@
-package app.egghunt.lib.data
+package app.egghunt.lib
 
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.util.*
 
 object Data {
     private fun open(): FirebaseDatabase {
@@ -20,5 +21,9 @@ object Data {
         reference.keepSynced(true)
 
         return reference
+    }
+
+    fun tag(): String {
+        return UUID.randomUUID().toString()
     }
 }

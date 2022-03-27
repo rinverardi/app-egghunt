@@ -9,21 +9,23 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- @remo Design me! -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/eggs"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_weight="1"/>
 
     <Button
         android:id="@+id/button_find"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin2"
+        android:layout_margin="@dimen/margin_l"
         android:layout_width="match_parent"
-        android:padding="@dimen/padding"
         android:text="@string/button_find"/>
 
     <Button
         android:id="@+id/button_hide"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin2"
+        android:layout_margin="@dimen/margin_l"
         android:layout_width="match_parent"
-        android:padding="@dimen/padding"
         android:text="@string/button_hide"/>
 </LinearLayout>

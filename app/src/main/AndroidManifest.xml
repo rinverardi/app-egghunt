@@ -20,23 +20,27 @@
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
 
         <activity
-            android:name=".action.scan.ScanActivity"
-            android:label="@string/activity_scan"/>
+            android:label="@string/activity_hide"
+            android:name=".action.hide.HideActivity"/>
 
         <activity
-            android:name=".hunter.HunterActivity"
+            android:label="@string/activity_scan"
+            android:name=".action.scan.ScanActivity"/>
+
+        <activity
             android:label="@string/activity_hunter"
+            android:name=".hunter.HunterActivity"
             android:theme="@style/Theme.EggHunt.NoActionBar"/>
 
         <activity
-            android:name=".organizer.OrganizerActivity"
             android:label="@string/activity_organizer"
+            android:name=".organizer.OrganizerActivity"
             android:theme="@style/Theme.EggHunt.NoActionBar"/>
 
         <activity
-            android:name=".welcome.WelcomeActivity"
             android:exported="true"
             android:label="@string/activity_welcome"
+            android:name=".welcome.WelcomeActivity"
             android:theme="@style/Theme.EggHunt.NoActionBar">
 
             <intent-filter>

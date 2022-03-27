@@ -1,11 +1,11 @@
-package app.egghunt.lib.error
+package app.egghunt.lib
 
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 
-class ErrorDialog : DialogFragment {
+class Popup : DialogFragment {
     constructor() : super()
 
     constructor(message: Int, title: Int) : super() {

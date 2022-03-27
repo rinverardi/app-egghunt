@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <dimen name="margin1">10dp</dimen>
-    <dimen name="margin2">20dp</dimen>
+    <dimen name="height">4dp</dimen>
 
-    <dimen name="padding">15dp</dimen>
+    <dimen name="margin_s">8dp</dimen>
+    <dimen name="margin_l">16dp</dimen>
+
+    <dimen name="padding_s">8dp</dimen>
+    <dimen name="padding_l">16dp</dimen>
+
+    <dimen name="radius">4dp</dimen>
 </resources>

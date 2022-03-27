@@ -18,11 +18,10 @@ import androidx.core.content.ContextCompat
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.hunter.HunterActivity
-import app.egghunt.lib.code.Code
-import app.egghunt.lib.code.CodeParser
-import app.egghunt.lib.error.ErrorDialog
+import app.egghunt.lib.Code
+import app.egghunt.lib.CodeParser
+import app.egghunt.lib.Popup
 import app.egghunt.organizer.OrganizerActivity
-import com.google.gson.Gson
 import kotlin.math.roundToLong
 
 class WelcomeActivity : AppCompatActivity() {
@@ -116,7 +115,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onScanEgg() {
-        val dialog = ErrorDialog(
+        val dialog = Popup(
             R.string.error_message_unexpected_egg_code,
             R.string.error_title
         )

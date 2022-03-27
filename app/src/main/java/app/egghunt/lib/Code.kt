@@ -1,4 +1,4 @@
-package app.egghunt.lib.code
+package app.egghunt.lib
 
 data class Code(
     val cd: String?,

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import app.egghunt.R
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -50,12 +51,44 @@ class ScanActivity : AppCompatActivity() {
         scanner.isAutoFocusEnabled = true
         scanner.isFlashEnabled = false
         scanner.scanMode = ScanMode.SINGLE
+
+        // @remo Remove me!
+
+        findViewById<Button>(R.id.c).setOnClickListener {
+            intent.putExtra(Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"The Competition\"," +
+                    "\"ct\":\"CCCCCC\"}")
+
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
+
+        findViewById<Button>(R.id.e).setOnClickListener {
+            intent.putExtra(Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"The Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"ed\":\"The Egg\"," +
+                    "\"et\":\"EEEEEE\"}")
+
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
+
+        findViewById<Button>(R.id.h).setOnClickListener {
+            intent.putExtra(Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"The Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"hd\":\"The Hunter\"," +
+                    "\"ht\":\"HHHHHH\"}")
+
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
-
             return true
         } else {
             return super.onOptionsItemSelected(item)
