@@ -21,6 +21,7 @@ import app.egghunt.hunter.HunterActivity
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
 import app.egghunt.lib.Popup
+import app.egghunt.lib.Prefs
 import app.egghunt.organizer.OrganizerActivity
 import kotlin.math.roundToLong
 
@@ -39,6 +40,40 @@ class WelcomeActivity : AppCompatActivity() {
                 }
             }
         }
+
+    private fun autoLoginAsHunter(): Boolean {
+        val hunter = Prefs.getHunter(this)
+
+        return if (hunter == null) {
+            false
+        } else {
+            val intent = Intent(this, HunterActivity::class.java)
+
+            intent.putExtra(HunterActivity.EXTRA_COMPETITION_DESCRIPTION, hunter[0])
+            intent.putExtra(HunterActivity.EXTRA_COMPETITION_TAG, hunter[1])
+            intent.putExtra(HunterActivity.EXTRA_HUNTER_DESCRIPTION, hunter[2])
+            intent.putExtra(HunterActivity.EXTRA_HUNTER_TAG, hunter[3])
+
+            startActivity(intent)
+            true
+        }
+    }
+
+    private fun autoLoginAsOrganizer(): Boolean {
+        val organizer = Prefs.getOrganizer(this)
+
+        return if (organizer == null) {
+            false
+        } else {
+            val intent = Intent(this, OrganizerActivity::class.java)
+
+            intent.putExtra(HunterActivity.EXTRA_COMPETITION_DESCRIPTION, organizer[0])
+            intent.putExtra(HunterActivity.EXTRA_COMPETITION_TAG, organizer[1])
+
+            startActivity(intent)
+            true
+        }
+    }
 
     @Suppress("UNUSED_PARAMETER")
     fun onClickButton(view: View) {
@@ -59,6 +94,11 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_welcome)
+
+        if (autoLoginAsHunter() || autoLoginAsOrganizer()) {
+            finish()
+            return
+        }
 
         // Initialize the button.
 
@@ -86,7 +126,6 @@ class WelcomeActivity : AppCompatActivity() {
         permissions: Array<String?>,
         results: IntArray
     ) {
-
         super.onRequestPermissionsResult(code, permissions, results)
 
         if (code == REQUEST_PERMISSION) {
@@ -116,8 +155,9 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun onScanEgg() {
         val dialog = Popup(
-            R.string.error_message_unexpected_egg,
-            R.string.error_title_oops
+            Popup.KEY_INFO,
+            R.string.error_unexpected_egg,
+            R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)

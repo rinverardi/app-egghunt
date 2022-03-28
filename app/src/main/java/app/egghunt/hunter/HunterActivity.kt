@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -18,14 +19,19 @@ import app.egghunt.lib.Data
 import app.egghunt.lib.DataBinding
 import app.egghunt.lib.EggAdapter
 import app.egghunt.lib.Popup
-import app.egghunt.organizer.OrganizerActivity
+import app.egghunt.lib.Prefs
+import app.egghunt.welcome.WelcomeActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DatabaseReference
 
 class HunterActivity : AppCompatActivity() {
+    private lateinit var competitionDescription: String
     private lateinit var competitionReference: DatabaseReference
+    private lateinit var competitionTag: String
     private var eggAdapter: EggAdapter? = null
+    private lateinit var hunterDescription: String
+    private lateinit var hunterTag: String
 
     private val scanLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -50,17 +56,42 @@ class HunterActivity : AppCompatActivity() {
         scanLauncher.launch(intent)
     }
 
+    private fun doLogout() {
+        supportFragmentManager.setFragmentResultListener(Popup.KEY_LOGOUT, this) { _, _ ->
+            Prefs.forgetHunter(this)
+
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
+        }
+
+        val dialog = Popup(
+            Popup.KEY_LOGOUT,
+            R.string.warning_logout,
+            R.string.exclamation_whoa
+        )
+
+        dialog.show(supportFragmentManager, null)
+    }
+
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
 
         setContentView(R.layout.activity_hunter)
 
+        // Remember the hunter.
+
+        val extras = intent.extras!!
+
+        competitionDescription = extras.getString(EXTRA_COMPETITION_DESCRIPTION)!!
+        competitionTag = extras.getString(EXTRA_COMPETITION_TAG)!!
+        hunterDescription = extras.getString(EXTRA_HUNTER_DESCRIPTION)!!
+        hunterTag = extras.getString(EXTRA_HUNTER_TAG)!!
+
+        Prefs.setHunter(this, competitionDescription, competitionTag, hunterDescription, hunterTag)
+
         // Sync the competition.
 
-        competitionReference = Data.syncCompetition(
-            intent.extras!!.getString(OrganizerActivity.EXTRA_COMPETITION_DESCRIPTION)!!,
-            intent.extras!!.getString(OrganizerActivity.EXTRA_COMPETITION_TAG)!!
-        )
+        competitionReference = Data.syncCompetition(competitionDescription, competitionTag)
 
         // Initialize the pager.
 
@@ -78,29 +109,35 @@ class HunterActivity : AppCompatActivity() {
 
         // Initialize the toolbar.
 
-        val hunter = intent.getStringExtra(EXTRA_HUNTER_DESCRIPTION)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
 
-        if (hunter != null && hunter.isNotEmpty()) {
-            findViewById<Toolbar>(R.id.toolbar)!!.title = hunter
+        toolbar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_action_close)
+
+        if (hunterDescription.isNotEmpty()) {
+            toolbar.title = hunterDescription
+        }
+
+        toolbar.setNavigationOnClickListener {
+            doLogout()
         }
     }
 
     private fun onScanCompetition() {
         val dialog = Popup(
-            R.string.error_message_unexpected_competition,
-            R.string.error_title_oops
+            Popup.KEY_INFO,
+            R.string.error_unexpected_competition,
+            R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)
     }
 
     private fun onScanEgg(code: Code) {
-        val competitionTag = intent.getStringExtra(EXTRA_COMPETITION_TAG)!!
-
         if (competitionTag != code.ct) {
             val dialog = Popup(
-                R.string.error_message_different_competition,
-                R.string.error_title_psst
+                Popup.KEY_INFO,
+                R.string.error_different_competition,
+                R.string.exclamation_psst
             )
 
             dialog.show(supportFragmentManager, null)
@@ -113,8 +150,9 @@ class HunterActivity : AppCompatActivity() {
 
     private fun onScanHunter() {
         val dialog = Popup(
-            R.string.error_message_unexpected_hunter,
-            R.string.error_title_oops
+            Popup.KEY_INFO,
+            R.string.error_unexpected_hunter,
+            R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)

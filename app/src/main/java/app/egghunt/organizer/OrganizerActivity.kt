@@ -8,6 +8,8 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
@@ -20,12 +22,16 @@ import app.egghunt.lib.DataBinding
 import app.egghunt.lib.EggAdapter
 import app.egghunt.lib.HintAdapter
 import app.egghunt.lib.Popup
+import app.egghunt.lib.Prefs
+import app.egghunt.welcome.WelcomeActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DatabaseReference
 
 class OrganizerActivity : AppCompatActivity() {
+    private lateinit var competitionDescription: String
     private lateinit var competitionReference: DatabaseReference
+    private lateinit var competitionTag: String
     private var eggAdapter: EggAdapter? = null
     private var hintAdapter: HintAdapter? = null
 
@@ -64,17 +70,40 @@ class OrganizerActivity : AppCompatActivity() {
         edit.text.clear()
     }
 
+    private fun doLogout() {
+        supportFragmentManager.setFragmentResultListener(Popup.KEY_LOGOUT, this) { _, _ ->
+            Prefs.forgetOrganizer(this)
+
+            startActivity(Intent(this, WelcomeActivity::class.java))
+            finish()
+        }
+
+        val dialog = Popup(
+            Popup.KEY_LOGOUT,
+            R.string.warning_logout,
+            R.string.exclamation_whoa
+        )
+
+        dialog.show(supportFragmentManager, null)
+    }
+
     override fun onCreate(state: Bundle?) {
         super.onCreate(state)
 
         setContentView(R.layout.activity_organizer)
 
+        // Remember the hunter.
+
+        val extras = intent.extras!!
+
+        competitionDescription = extras.getString(HunterActivity.EXTRA_COMPETITION_DESCRIPTION)!!
+        competitionTag = extras.getString(HunterActivity.EXTRA_COMPETITION_TAG)!!
+
+        Prefs.setOrganizer(this, competitionDescription, competitionTag)
+
         // Sync the competition.
 
-        competitionReference = Data.syncCompetition(
-            intent.extras!!.getString(EXTRA_COMPETITION_DESCRIPTION)!!,
-            intent.extras!!.getString(EXTRA_COMPETITION_TAG)!!
-        )
+        competitionReference = Data.syncCompetition(competitionDescription, competitionTag)
 
         // Initialize the pager.
 
@@ -89,12 +118,23 @@ class OrganizerActivity : AppCompatActivity() {
         TabLayoutMediator(tabs, pager) { tab, tabPosition ->
             tab.text = resources.getStringArray(R.array.tabs_organizer)[tabPosition]
         }.attach()
+
+        // Initialize the toolbar.
+
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
+
+        toolbar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_action_close)
+
+        toolbar.setNavigationOnClickListener {
+            doLogout()
+        }
     }
 
     private fun onScanCompetition() {
         val dialog = Popup(
-            R.string.error_message_unexpected_competition,
-            R.string.error_title_oops
+            Popup.KEY_INFO,
+            R.string.error_unexpected_competition,
+            R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)
@@ -105,8 +145,9 @@ class OrganizerActivity : AppCompatActivity() {
 
         if (competitionTag != code.ct) {
             val dialog = Popup(
-                R.string.error_message_different_competition,
-                R.string.error_title_psst
+                Popup.KEY_INFO,
+                R.string.error_different_competition,
+                R.string.exclamation_psst
             )
 
             dialog.show(supportFragmentManager, null)
@@ -121,8 +162,9 @@ class OrganizerActivity : AppCompatActivity() {
 
     private fun onScanHunter() {
         val dialog = Popup(
-            R.string.error_message_unexpected_hunter,
-            R.string.error_title_oops
+            Popup.KEY_INFO,
+            R.string.error_unexpected_hunter,
+            R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)
