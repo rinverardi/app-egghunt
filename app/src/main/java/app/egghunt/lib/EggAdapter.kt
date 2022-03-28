@@ -1,5 +1,6 @@
 package app.egghunt.lib
 
+import android.text.TextUtils
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,12 @@ class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
         position: Int,
         egg: Egg
     ) {
-        viewHolder.description.text = egg.description
+        val context = viewHolder.itemView.context
+
+        if (TextUtils.isEmpty(egg.description))
+            viewHolder.description.text = context.getString(R.string.type_egg)
+        else
+            viewHolder.description.text = egg.description
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EggViewHolder {

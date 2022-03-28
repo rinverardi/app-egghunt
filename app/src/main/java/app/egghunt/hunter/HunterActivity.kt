@@ -3,6 +3,7 @@ package app.egghunt.hunter
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
@@ -113,7 +114,7 @@ class HunterActivity : AppCompatActivity() {
 
         toolbar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_action_close)
 
-        if (hunterDescription.isNotEmpty()) {
+        if (!TextUtils.isEmpty(hunterDescription)) {
             toolbar.title = hunterDescription
         }
 
