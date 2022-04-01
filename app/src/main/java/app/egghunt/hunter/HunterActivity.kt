@@ -14,21 +14,21 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
+import app.egghunt.competition.CompetitionRepo
+import app.egghunt.egg.EggAdapter
+import app.egghunt.egg.EggRepo
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
-import app.egghunt.lib.Data
-import app.egghunt.lib.DataBinding
-import app.egghunt.lib.EggAdapter
+import app.egghunt.lib.LocalData
 import app.egghunt.lib.Popup
-import app.egghunt.lib.Prefs
 import app.egghunt.welcome.WelcomeActivity
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.database.DatabaseReference
 
 class HunterActivity : AppCompatActivity() {
+    private lateinit var competition: DatabaseReference
     private lateinit var competitionDescription: String
-    private lateinit var competitionReference: DatabaseReference
     private lateinit var competitionTag: String
     private var eggAdapter: EggAdapter? = null
     private lateinit var hunterDescription: String
@@ -59,7 +59,7 @@ class HunterActivity : AppCompatActivity() {
 
     private fun doLogout() {
         supportFragmentManager.setFragmentResultListener(Popup.KEY_LOGOUT, this) { _, _ ->
-            Prefs.forgetHunter(this)
+            LocalData.forgetCurrentHunter(this)
 
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
@@ -88,11 +88,17 @@ class HunterActivity : AppCompatActivity() {
         hunterDescription = extras.getString(EXTRA_HUNTER_DESCRIPTION)!!
         hunterTag = extras.getString(EXTRA_HUNTER_TAG)!!
 
-        Prefs.setHunter(this, competitionDescription, competitionTag, hunterDescription, hunterTag)
+        LocalData.setCurrentHunter(
+            this,
+            competitionDescription,
+            competitionTag,
+            hunterDescription,
+            hunterTag
+        )
 
         // Sync the competition.
 
-        competitionReference = Data.syncCompetition(competitionDescription, competitionTag)
+        competition = CompetitionRepo.sync(competitionDescription, competitionTag)
 
         // Initialize the pager.
 
@@ -187,7 +193,7 @@ class HunterActivity : AppCompatActivity() {
 
         if (eggRecycler != null) {
             eggAdapter?.stopListening()
-            eggAdapter = DataBinding.bindEggs(competitionReference, eggRecycler)
+            eggAdapter = EggRepo.bind(competition, eggRecycler)
         }
     }
 

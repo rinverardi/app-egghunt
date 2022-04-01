@@ -1,4 +1,4 @@
-package app.egghunt.lib
+package app.egghunt.hint
 
 import android.view.View
 import android.widget.TextView

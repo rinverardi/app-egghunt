@@ -20,8 +20,8 @@ import app.egghunt.action.scan.ScanActivity
 import app.egghunt.hunter.HunterActivity
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
+import app.egghunt.lib.LocalData
 import app.egghunt.lib.Popup
-import app.egghunt.lib.Prefs
 import app.egghunt.organizer.OrganizerActivity
 import kotlin.math.roundToLong
 
@@ -42,7 +42,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
     private fun autoLoginAsHunter(): Boolean {
-        val hunter = Prefs.getHunter(this)
+        val hunter = LocalData.loadCurrentHunter(this)
 
         return if (hunter == null) {
             false
@@ -60,7 +60,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun autoLoginAsOrganizer(): Boolean {
-        val organizer = Prefs.getOrganizer(this)
+        val organizer = LocalData.loadCurrentOrganizer(this)
 
         return if (organizer == null) {
             false

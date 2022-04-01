@@ -6,4 +6,4 @@ then
   exit 1
 fi
 
-signal_reset "$STUDIO" "$BENCH_ROOT" &> /dev/null &
+"$STUDIO" "$BENCH_ROOT" &> /dev/null &

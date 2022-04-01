@@ -1,4 +1,4 @@
-package app.egghunt.lib
+package app.egghunt.egg
 
 import android.view.View
 import android.widget.TextView

@@ -1,9 +1,7 @@
-package app.egghunt.lib
+package app.egghunt.egg
 
 import android.text.TextUtils
-import android.text.format.DateUtils
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import app.egghunt.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter

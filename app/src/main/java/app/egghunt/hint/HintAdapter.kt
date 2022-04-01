@@ -1,4 +1,4 @@
-package app.egghunt.lib
+package app.egghunt.hint
 
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -32,7 +32,8 @@ class HintAdapter(options: FirebaseRecyclerOptions<Hint>) :
                 ""
             } else {
                 DateUtils.formatDateTime(context, hint.postedAt, DateUtils.FORMAT_SHOW_TIME)
-            })
+            }
+        )
 
         viewHolder.text.text = hint.text
     }

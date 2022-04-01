@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-object Prefs {
-    fun forgetHunter(context: Context) {
+object LocalData {
+    fun forgetCurrentHunter(context: Context) {
         open(context).edit {
             remove(KEY_COMPETITION_DESCRIPTION)
             remove(KEY_COMPETITION_TAG)
@@ -14,14 +14,14 @@ object Prefs {
         }
     }
 
-    fun forgetOrganizer(context: Context) {
+    fun forgetCurrentOrganizer(context: Context) {
         open(context).edit {
             remove(KEY_COMPETITION_DESCRIPTION)
             remove(KEY_COMPETITION_TAG)
         }
     }
 
-    fun getHunter(context: Context): List<String>? {
+    fun loadCurrentHunter(context: Context): List<String>? {
         val sharedPrefs = open(context)
 
         return when {
@@ -35,7 +35,7 @@ object Prefs {
         }
     }
 
-    fun getOrganizer(context: Context): List<String>? {
+    fun loadCurrentOrganizer(context: Context): List<String>? {
         val sharedPrefs = open(context)
 
         return when {
@@ -48,7 +48,10 @@ object Prefs {
         }
     }
 
-    fun setHunter(
+    private fun open(context: Context): SharedPreferences =
+        context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+
+    fun setCurrentHunter(
         context: Context,
         competitionDescription: String,
         competitionTag: String,
@@ -63,7 +66,7 @@ object Prefs {
         }
     }
 
-    fun setOrganizer(
+    fun setCurrentOrganizer(
         context: Context,
         competitionDescription: String,
         competitionTag: String
@@ -75,9 +78,6 @@ object Prefs {
             remove(KEY_HUNTER_TAG)
         }
     }
-
-    private fun open(context: Context): SharedPreferences =
-        context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
 
     private const val KEY_COMPETITION_DESCRIPTION = "cd"
     private const val KEY_COMPETITION_TAG = "ct"
