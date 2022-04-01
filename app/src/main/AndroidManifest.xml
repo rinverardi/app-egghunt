@@ -47,6 +47,8 @@
             </intent-filter>
         </activity>
 
+        <service android:exported="false" android:name=".device.DeviceService"/>
+
         <!-- Firebase Messaging -->
 
         <meta-data

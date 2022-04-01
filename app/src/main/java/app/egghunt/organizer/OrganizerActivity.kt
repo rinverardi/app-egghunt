@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.competition.CompetitionActivity
+import app.egghunt.competition.CompetitionManager
 import app.egghunt.egg.EggAdapter
 import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
@@ -17,7 +18,7 @@ import app.egghunt.hint.HintAdapter
 import app.egghunt.hint.HintManager
 import app.egghunt.hint.HintRepo
 import app.egghunt.lib.Code
-import app.egghunt.lib.LocalData
+import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -28,7 +29,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     private fun doHide() {
         val intent = Intent(this, ScanActivity::class.java)
 
-        intent.putExtra(ScanActivity.EXTRA_TITLE, R.string.activity_scan_egg)
+        intent.putExtra(Extras.TITLE, R.string.activity_scan_egg)
 
         scanLauncher.launch(intent)
     }
@@ -46,7 +47,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
 
         // Remember the organizer.
 
-        LocalData.saveCurrentOrganizer(this, competitionDescription, competitionTag)
+        CompetitionManager.enterAsOrganizer(this, competitionDescription, competitionTag)
 
         // Initialize the pager.
 

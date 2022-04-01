@@ -11,11 +11,12 @@ import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.competition.CompetitionActivity
+import app.egghunt.competition.CompetitionManager
 import app.egghunt.egg.EggAdapter
 import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
 import app.egghunt.lib.Code
-import app.egghunt.lib.LocalData
+import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -27,7 +28,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
     private fun doFind() {
         val intent = Intent(this, ScanActivity::class.java)
 
-        intent.putExtra(ScanActivity.EXTRA_TITLE, R.string.activity_scan_egg)
+        intent.putExtra(Extras.TITLE, R.string.activity_scan_egg)
 
         scanLauncher.launch(intent)
     }
@@ -39,10 +40,10 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         val extras = intent.extras!!
 
-        hunterDescription = extras.getString(EXTRA_HUNTER_DESCRIPTION)!!
-        hunterTag = extras.getString(EXTRA_HUNTER_TAG)!!
+        hunterDescription = extras.getString(Extras.HUNTER_DESCRIPTION)!!
+        hunterTag = extras.getString(Extras.HUNTER_TAG)!!
 
-        LocalData.saveCurrentHunter(
+        CompetitionManager.enterAsHunter(
             this,
             competitionDescription,
             competitionTag,
@@ -126,10 +127,5 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         val hideButton: Button? = tab.findViewById(R.id.button_hide)
 
         hideButton?.visibility = View.GONE
-    }
-
-    companion object {
-        const val EXTRA_HUNTER_DESCRIPTION = "hunter_description"
-        const val EXTRA_HUNTER_TAG = "hunter_tag"
     }
 }

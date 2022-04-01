@@ -15,7 +15,6 @@ import app.egghunt.lib.Actions
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
 import app.egghunt.lib.Extras
-import app.egghunt.lib.LocalData
 import app.egghunt.lib.Messaging
 import app.egghunt.lib.PopupDialog
 import app.egghunt.lib.PopupNotification
@@ -51,15 +50,15 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
         }
 
     private fun doLogout() {
-        supportFragmentManager.setFragmentResultListener(PopupDialog.ACTION_LOGOUT, this) { _, _ ->
-            LocalData.clear(this)
+        supportFragmentManager.setFragmentResultListener(Actions.LOGOUT, this) { _, _ ->
+            CompetitionManager.leave(this, competitionDescription, competitionTag)
 
             startActivity(Intent(this, WelcomeActivity::class.java))
             finish()
         }
 
         val dialog = PopupDialog(
-            PopupDialog.ACTION_LOGOUT,
+            Actions.LOGOUT,
             R.string.warning_logout,
             R.string.exclamation_whoa
         )
@@ -76,21 +75,16 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
         val extras = intent.extras!!
 
-        competitionDescription = extras.getString(EXTRA_COMPETITION_DESCRIPTION)!!
-        competitionTag = extras.getString(EXTRA_COMPETITION_TAG)!!
+        competitionDescription = extras.getString(Extras.COMPETITION_DESCRIPTION)!!
+        competitionTag = extras.getString(Extras.COMPETITION_TAG)!!
 
         competition = CompetitionRepo.sync(competitionDescription, competitionTag)
 
         // Attach the messaging.
 
-        val intentFilter = IntentFilter()
+        registerReceiver(broadcastReceiver, IntentFilter(Actions.NEW_MESSAGE))
 
-        intentFilter.addAction(Actions.NEW_MESSAGE)
-        intentFilter.addAction(Actions.NEW_TOKEN)
-
-        registerReceiver(broadcastReceiver, intentFilter)
-
-        Messaging.start(competition)
+        Messaging.register(this)
 
         // Initialize the toolbar.
 
@@ -116,7 +110,7 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
     private fun onScanCompetition() {
         val dialog = PopupDialog(
-            PopupDialog.ACTION_INFO,
+            null,
             R.string.error_unexpected_competition,
             R.string.exclamation_oops
         )
@@ -125,11 +119,11 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
     }
 
     protected open fun onScanEgg(code: Code) {
-        val competitionTag = intent.getStringExtra(EXTRA_COMPETITION_TAG)!!
+        val competitionTag = intent.getStringExtra(Extras.COMPETITION_TAG)!!
 
         if (competitionTag != code.ct) {
             val dialog = PopupDialog(
-                PopupDialog.ACTION_INFO,
+                null,
                 R.string.error_different_competition,
                 R.string.exclamation_psst
             )
@@ -141,16 +135,11 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
     private fun onScanHunter() {
         val dialog = PopupDialog(
-            PopupDialog.ACTION_INFO,
+            null,
             R.string.error_unexpected_hunter,
             R.string.exclamation_oops
         )
 
         dialog.show(supportFragmentManager, null)
-    }
-
-    companion object {
-        const val EXTRA_COMPETITION_DESCRIPTION = "competition_description"
-        const val EXTRA_COMPETITION_TAG = "competition_tag"
     }
 }

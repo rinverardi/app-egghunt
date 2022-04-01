@@ -6,25 +6,25 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import app.egghunt.R
 
-class PopupDialog(action: String, body: Int, title: Int) : DialogFragment() {
+class PopupDialog(action: String?, body: Int, title: Int) : DialogFragment() {
     init {
         val arguments = Bundle()
 
-        arguments.putString(ARGUMENT_ACTION, action)
-        arguments.putInt(ARGUMENT_BODY, body)
-        arguments.putInt(ARGUMENT_TITLE, title)
+        arguments.putString(Arguments.ACTION, action)
+        arguments.putInt(Arguments.BODY, body)
+        arguments.putInt(Arguments.TITLE, title)
 
         setArguments(arguments)
     }
 
     override fun onCreateDialog(state: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-            .setMessage(requireArguments().getInt(ARGUMENT_BODY))
-            .setTitle(requireArguments().getInt(ARGUMENT_TITLE))
+            .setMessage(requireArguments().getInt(Arguments.BODY))
+            .setTitle(requireArguments().getInt(Arguments.TITLE))
 
-        val action = requireArguments().getString(ARGUMENT_ACTION)!!
+        val action = requireArguments().getString(Arguments.ACTION)
 
-        if (action == ACTION_LOGOUT) {
+        if (action == Actions.LOGOUT) {
             builder
                 .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                     dialog.dismiss()
@@ -38,14 +38,5 @@ class PopupDialog(action: String, body: Int, title: Int) : DialogFragment() {
         }
 
         return builder.create()
-    }
-
-    companion object {
-        const val ACTION_INFO = "info"
-        const val ACTION_LOGOUT = "logout"
-
-        const val ARGUMENT_ACTION = "action"
-        const val ARGUMENT_BODY = "body"
-        const val ARGUMENT_TITLE = "title"
     }
 }

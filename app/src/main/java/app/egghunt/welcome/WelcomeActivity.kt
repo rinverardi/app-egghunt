@@ -17,10 +17,10 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
-import app.egghunt.competition.CompetitionActivity
 import app.egghunt.hunter.HunterActivity
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
+import app.egghunt.lib.Extras
 import app.egghunt.lib.LocalData
 import app.egghunt.lib.PopupDialog
 import app.egghunt.organizer.OrganizerActivity
@@ -50,10 +50,10 @@ class WelcomeActivity : AppCompatActivity() {
         } else {
             val intent = Intent(this, HunterActivity::class.java)
 
-            intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_DESCRIPTION, hunter[0])
-            intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_TAG, hunter[1])
-            intent.putExtra(HunterActivity.EXTRA_HUNTER_DESCRIPTION, hunter[2])
-            intent.putExtra(HunterActivity.EXTRA_HUNTER_TAG, hunter[3])
+            intent.putExtra(Extras.COMPETITION_DESCRIPTION, hunter[0])
+            intent.putExtra(Extras.COMPETITION_TAG, hunter[1])
+            intent.putExtra(Extras.HUNTER_DESCRIPTION, hunter[2])
+            intent.putExtra(Extras.HUNTER_TAG, hunter[3])
 
             startActivity(intent)
             true
@@ -68,8 +68,8 @@ class WelcomeActivity : AppCompatActivity() {
         } else {
             val intent = Intent(this, OrganizerActivity::class.java)
 
-            intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_DESCRIPTION, organizer[0])
-            intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_TAG, organizer[1])
+            intent.putExtra(Extras.COMPETITION_DESCRIPTION, organizer[0])
+            intent.putExtra(Extras.COMPETITION_TAG, organizer[1])
 
             startActivity(intent)
             true
@@ -147,8 +147,8 @@ class WelcomeActivity : AppCompatActivity() {
     private fun onScanCompetition(code: Code) {
         val intent = Intent(this, OrganizerActivity::class.java)
 
-        intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_TAG, code.ct)
+        intent.putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(Extras.COMPETITION_TAG, code.ct)
 
         startActivity(intent)
         finish()
@@ -156,7 +156,7 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun onScanEgg() {
         val dialog = PopupDialog(
-            PopupDialog.ACTION_INFO,
+            null,
             R.string.error_unexpected_egg,
             R.string.exclamation_oops
         )
@@ -167,10 +167,10 @@ class WelcomeActivity : AppCompatActivity() {
     private fun onScanHunter(code: Code) {
         val intent = Intent(this, HunterActivity::class.java)
 
-        intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(CompetitionActivity.EXTRA_COMPETITION_TAG, code.ct)
-        intent.putExtra(HunterActivity.EXTRA_HUNTER_DESCRIPTION, code.hd)
-        intent.putExtra(HunterActivity.EXTRA_HUNTER_TAG, code.ht)
+        intent.putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
+        intent.putExtra(Extras.COMPETITION_TAG, code.ct)
+        intent.putExtra(Extras.HUNTER_DESCRIPTION, code.hd)
+        intent.putExtra(Extras.HUNTER_TAG, code.ht)
 
         startActivity(intent)
         finish()

@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import app.egghunt.R
+import app.egghunt.lib.Extras
 import com.budiyev.android.codescanner.AutoFocusMode
 import com.budiyev.android.codescanner.CodeScanner
 import com.budiyev.android.codescanner.DecodeCallback
@@ -26,7 +27,7 @@ class ScanActivity : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        setTitle(intent.getIntExtra(EXTRA_TITLE, R.string.activity_scan))
+        setTitle(intent.getIntExtra(Extras.TITLE, R.string.activity_scan))
 
         // Initialize the scanner.
 
@@ -105,9 +106,5 @@ class ScanActivity : AppCompatActivity() {
         scanner.releaseResources()
 
         super.onPause()
-    }
-
-    companion object {
-        const val EXTRA_TITLE = "title"
     }
 }

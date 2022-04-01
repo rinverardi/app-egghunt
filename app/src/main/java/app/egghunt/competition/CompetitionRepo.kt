@@ -1,5 +1,6 @@
 package app.egghunt.competition
 
+import app.egghunt.lib.Keys
 import app.egghunt.lib.RemoteData
 import com.google.firebase.database.DatabaseReference
 
@@ -8,9 +9,9 @@ object CompetitionRepo {
         competitionDescription: String,
         competitionTag: String,
     ): DatabaseReference {
-        val reference = RemoteData.open().getReference("competition/$competitionTag")
+        val reference = RemoteData.open().getReference("${Keys.COMPETITION}/$competitionTag")
 
-        reference.child("description").setValue(competitionDescription)
+        reference.child(Keys.DESCRIPTION).setValue(competitionDescription)
         reference.keepSynced(true)
 
         return reference
