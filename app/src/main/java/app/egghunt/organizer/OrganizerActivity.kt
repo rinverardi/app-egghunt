@@ -16,6 +16,7 @@ import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.competition.CompetitionRepo
 import app.egghunt.egg.EggAdapter
+import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
 import app.egghunt.hint.HintAdapter
 import app.egghunt.hint.HintRepo
@@ -152,10 +153,7 @@ class OrganizerActivity : AppCompatActivity() {
             return
         }
 
-        val egg = competition.child("egg").child(code.et!!)
-
-        egg.child("description").setValue(code.ed)
-        egg.child("hidden_at").setValue(System.currentTimeMillis())
+        EggManager.hide(competition, code)
     }
 
     private fun onScanHunter() {

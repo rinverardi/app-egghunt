@@ -25,6 +25,7 @@
         <LinearLayout
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:padding="@dimen/padding_l">
 
             <TextView
@@ -32,6 +33,20 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/time_found"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_width="match_parent"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/time_hidden"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_s"
+                android:layout_width="match_parent"
+                android:visibility="gone"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

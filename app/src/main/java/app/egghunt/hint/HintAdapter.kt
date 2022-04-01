@@ -1,5 +1,6 @@
 package app.egghunt.hint
 
+import android.content.Context
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -26,16 +27,8 @@ class HintAdapter(options: FirebaseRecyclerOptions<Hint>) :
     ) {
         val context = recycler!!.context
 
-        viewHolder.postedAt.text = context.getString(
-            R.string.caption_posted_at,
-            if (hint.postedAt == null) {
-                ""
-            } else {
-                DateUtils.formatDateTime(context, hint.postedAt, DateUtils.FORMAT_SHOW_TIME)
-            }
-        )
-
         viewHolder.text.text = hint.text
+        viewHolder.timePosted.text = sayPosted(context, hint)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HintViewHolder {
@@ -54,5 +47,15 @@ class HintAdapter(options: FirebaseRecyclerOptions<Hint>) :
         this.recycler = null
 
         super.onDetachedFromRecyclerView(recycler)
+    }
+
+    private fun sayPosted(context: Context, hint: Hint): String {
+        val time = if (hint.timePosted == null) {
+            ""
+        } else {
+            DateUtils.formatDateTime(context, hint.timePosted, DateUtils.FORMAT_SHOW_TIME)
+        }
+
+        return context.getString(R.string.time_posted, time)
     }
 }

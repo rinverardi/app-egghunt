@@ -7,11 +7,11 @@ object HintManager {
     fun post(competition: DatabaseReference, text: String) {
         val hint = competition.child("hint").child(tag())
 
-        val postedAt = System.currentTimeMillis()
+        val time = System.currentTimeMillis()
 
-        hint.child("order").setValue(-postedAt)
-        hint.child("postedAt").setValue(postedAt)
+        hint.child("order").setValue(-time)
         hint.child("text").setValue(text)
+        hint.child("timePosted").setValue(time)
     }
 
     private fun tag(): String {

@@ -1,3 +1,3 @@
 package app.egghunt.hint
 
-data class Hint(val postedAt: Long? = null, val text: String? = null)
+data class Hint(val text: String? = null, val timePosted: Long? = null)

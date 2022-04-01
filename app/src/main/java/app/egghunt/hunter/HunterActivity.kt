@@ -16,6 +16,7 @@ import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.competition.CompetitionRepo
 import app.egghunt.egg.EggAdapter
+import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
@@ -151,8 +152,7 @@ class HunterActivity : AppCompatActivity() {
             return
         }
 
-        // @remo Implement me!
-
+        EggManager.find(competition, code, hunterDescription, hunterTag)
     }
 
     private fun onScanHunter() {

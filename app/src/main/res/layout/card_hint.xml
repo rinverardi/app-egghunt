@@ -34,7 +34,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/posted_at"
+                android:id="@+id/time_posted"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_s"
                 android:layout_width="match_parent"/>

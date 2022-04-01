@@ -13,7 +13,6 @@
     <string name="button_logout">Logout</string>
     <string name="button_post">Post</string>
     <string name="button_scan">Scan a code</string>
-    <string name="caption_posted_at">Posted at %s</string>
     <string name="error_different_competition">You just scanned an egg code from a different competition. Put it back before someone notices!</string>
     <string name="error_unexpected_competition">You just scanned a competition code. Please scan an egg code instead!</string>
     <string name="error_unexpected_egg">You just scanned an egg code. Please scan a competition code or a hunter code instead.</string>
@@ -22,6 +21,10 @@
     <string name="exclamation_psst">Psst! 🤫</string>
     <string name="exclamation_whoa">Whoa! 😯</string>
     <string name="hint">Hint</string>
+    <string name="time_found">Found at %s</string>
+    <string name="time_found_by">Found at %s by %s</string>
+    <string name="time_hidden">Hidden at %s</string>
+    <string name="time_posted">Posted at %s</string>
     <string name="title_welcome0">Welcome to the egg hunt!</string>
     <string name="title_welcome1">Get started by scanning a code.</string>
     <string name="toast_camera_access_denied">Camera access denied.</string>
