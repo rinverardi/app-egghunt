@@ -14,7 +14,7 @@ object EggRepo {
 
         // Assign the adapter.
 
-        val query = competition.child("egg")
+        val query = competition.child("egg").orderByChild("description")
 
         val adapter = EggAdapter(
             FirebaseRecyclerOptions.Builder<Egg>()

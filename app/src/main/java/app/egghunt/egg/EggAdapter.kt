@@ -6,6 +6,7 @@ import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import app.egghunt.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
@@ -26,8 +27,14 @@ class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
             viewHolder.description.text = egg.description
 
         if (egg.timeFound == null) {
+            viewHolder.itemView.background =
+                AppCompatResources.getDrawable(context, R.color.white)
+
             viewHolder.timeFound.visibility = View.GONE
         } else {
+            viewHolder.itemView.background =
+                AppCompatResources.getDrawable(context, R.color.green)
+
             viewHolder.timeFound.text = sayFound(context, egg)
             viewHolder.timeFound.visibility = View.VISIBLE
         }
