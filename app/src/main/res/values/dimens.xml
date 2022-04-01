@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <dimen name="elevation">5dp</dimen>
+
     <dimen name="height">5dp</dimen>
 
     <dimen name="margin_s">8dp</dimen>
@@ -12,4 +14,6 @@
     <dimen name="padding_l">16dp</dimen>
 
     <dimen name="radius">3dp</dimen>
+
+    <dimen name="text">16sp</dimen>
 </resources>

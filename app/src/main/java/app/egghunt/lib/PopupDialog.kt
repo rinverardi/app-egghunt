@@ -6,14 +6,12 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import app.egghunt.R
 
-class Popup : DialogFragment {
-    constructor() : super()
-
-    constructor(key: String, message: Int, title: Int) : super() {
+class PopupDialog(action: String, body: Int, title: Int) : DialogFragment() {
+    init {
         val arguments = Bundle()
 
-        arguments.putString(ARGUMENT_KEY, key)
-        arguments.putInt(ARGUMENT_MESSAGE, message)
+        arguments.putString(ARGUMENT_ACTION, action)
+        arguments.putInt(ARGUMENT_BODY, body)
         arguments.putInt(ARGUMENT_TITLE, title)
 
         setArguments(arguments)
@@ -21,18 +19,18 @@ class Popup : DialogFragment {
 
     override fun onCreateDialog(state: Bundle?): Dialog {
         val builder = AlertDialog.Builder(activity)
-            .setMessage(requireArguments().getInt(ARGUMENT_MESSAGE))
+            .setMessage(requireArguments().getInt(ARGUMENT_BODY))
             .setTitle(requireArguments().getInt(ARGUMENT_TITLE))
 
-        val key = requireArguments().getString(ARGUMENT_KEY)!!
+        val action = requireArguments().getString(ARGUMENT_ACTION)!!
 
-        if (key == KEY_LOGOUT) {
+        if (action == ACTION_LOGOUT) {
             builder
                 .setNegativeButton(android.R.string.cancel) { dialog, _ ->
                     dialog.dismiss()
                 }
                 .setPositiveButton(R.string.button_logout) { dialog, _ ->
-                    parentFragmentManager.setFragmentResult(key, Bundle())
+                    parentFragmentManager.setFragmentResult(action, Bundle())
                     dialog.dismiss()
                 }
         } else {
@@ -43,11 +41,11 @@ class Popup : DialogFragment {
     }
 
     companion object {
-        const val ARGUMENT_KEY = "key"
-        const val ARGUMENT_MESSAGE = "message"
-        const val ARGUMENT_TITLE = "title"
+        const val ACTION_INFO = "info"
+        const val ACTION_LOGOUT = "logout"
 
-        const val KEY_INFO = "info"
-        const val KEY_LOGOUT = "logout"
+        const val ARGUMENT_ACTION = "action"
+        const val ARGUMENT_BODY = "body"
+        const val ARGUMENT_TITLE = "title"
     }
 }

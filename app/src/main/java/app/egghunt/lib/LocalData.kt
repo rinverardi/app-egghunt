@@ -5,19 +5,9 @@ import android.content.SharedPreferences
 import androidx.core.content.edit
 
 object LocalData {
-    fun forgetCurrentHunter(context: Context) {
+    fun clear(context: Context) {
         open(context).edit {
-            remove(KEY_COMPETITION_DESCRIPTION)
-            remove(KEY_COMPETITION_TAG)
-            remove(KEY_HUNTER_DESCRIPTION)
-            remove(KEY_HUNTER_TAG)
-        }
-    }
-
-    fun forgetCurrentOrganizer(context: Context) {
-        open(context).edit {
-            remove(KEY_COMPETITION_DESCRIPTION)
-            remove(KEY_COMPETITION_TAG)
+            clear()
         }
     }
 
@@ -51,7 +41,7 @@ object LocalData {
     private fun open(context: Context): SharedPreferences =
         context.getSharedPreferences("prefs", Context.MODE_PRIVATE)
 
-    fun setCurrentHunter(
+    fun saveCurrentHunter(
         context: Context,
         competitionDescription: String,
         competitionTag: String,
@@ -66,7 +56,7 @@ object LocalData {
         }
     }
 
-    fun setCurrentOrganizer(
+    fun saveCurrentOrganizer(
         context: Context,
         competitionDescription: String,
         competitionTag: String
@@ -79,8 +69,8 @@ object LocalData {
         }
     }
 
-    private const val KEY_COMPETITION_DESCRIPTION = "cd"
-    private const val KEY_COMPETITION_TAG = "ct"
-    private const val KEY_HUNTER_DESCRIPTION = "hd"
-    private const val KEY_HUNTER_TAG = "ht"
+    private const val KEY_COMPETITION_DESCRIPTION = "competition_description"
+    private const val KEY_COMPETITION_TAG = "competition_tag"
+    private const val KEY_HUNTER_DESCRIPTION = "hunter_description"
+    private const val KEY_HUNTER_TAG = "hunter_tag"
 }

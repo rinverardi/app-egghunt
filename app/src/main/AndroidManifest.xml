@@ -17,8 +17,6 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.EggHunt">
 
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
-
         <activity
             android:label="@string/activity_hide"
             android:name=".action.hide.HideActivity"/>
@@ -48,5 +46,24 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Firebase Messaging -->
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_egg"/>
+
+        <service
+            android:exported="false"
+            android:name=".lib.MessagingService">
+
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
+        <!-- Google Maps -->
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="${MAPS_API_KEY}"/>
     </application>
 </manifest>
