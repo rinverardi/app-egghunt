@@ -35,21 +35,21 @@
         <Button
             android:id="@+id/c"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_s"
+            android:layout_margin="@dimen/default_margin_s"
             android:layout_width="wrap_content"
             android:text="C"/>
 
         <Button
             android:id="@+id/e"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_s"
+            android:layout_margin="@dimen/default_margin_s"
             android:layout_width="wrap_content"
             android:text="E"/>
 
         <Button
             android:id="@+id/h"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_s"
+            android:layout_margin="@dimen/default_margin_s"
             android:layout_width="wrap_content"
             android:text="H"/>
     </LinearLayout>

@@ -69,10 +69,14 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         findViewById<Toolbar>(R.id.toolbar)!!.title = hunterDescription
     }
 
-    override fun onScanEgg(code: Code) {
-        super.onScanEgg(code)
+    override fun onScanEgg(code: Code): Boolean {
+        val result = super.onScanEgg(code)
 
-        EggManager.find(competition, code, hunterDescription, hunterTag)
+        if (result) {
+            EggManager.find(competition, code, hunterDescription, hunterTag)
+        }
+
+        return result
     }
 
     // @remo Fix me!

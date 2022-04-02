@@ -12,7 +12,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/eggs"
         android:layout_height="0dp"
-        android:paddingVertical="@dimen/padding_s"
+        android:paddingVertical="@dimen/default_padding_s"
         android:layout_weight="1"
         android:layout_width="match_parent"/>
 
@@ -21,8 +21,8 @@
         android:insetBottom="0dp"
         android:insetTop="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_l"
-        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginBottom="@dimen/default_margin_l"
+        android:layout_marginHorizontal="@dimen/default_margin_l"
         android:layout_width="match_parent"
         android:text="@string/button_find"/>
 
@@ -31,8 +31,8 @@
         android:insetBottom="0dp"
         android:insetTop="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_l"
-        android:layout_marginHorizontal="@dimen/margin_l"
+        android:layout_marginBottom="@dimen/default_margin_l"
+        android:layout_marginHorizontal="@dimen/default_margin_l"
         android:layout_width="match_parent"
         android:text="@string/button_hide"/>
 </LinearLayout>

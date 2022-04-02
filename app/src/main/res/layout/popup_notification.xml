@@ -9,11 +9,12 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/card"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/margin_l"
+        android:layout_marginHorizontal="@dimen/default_margin_l"
+        android:layout_marginTop="@dimen/popup_margin"
         android:layout_width="match_parent"
-        app:cardCornerRadius="@dimen/radius"
-        app:cardElevation="@dimen/elevation"
-        app:contentPadding="@dimen/padding_l">
+        app:cardCornerRadius="@dimen/default_radius"
+        app:cardElevation="@dimen/default_elevation"
+        app:contentPadding="@dimen/default_padding_l">
 
         <LinearLayout
             android:layout_height="wrap_content"
@@ -25,16 +26,16 @@
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text"
+                android:textSize="@dimen/popup_text"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/body"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginTop="@dimen/default_margin_s"
                 android:layout_width="match_parent"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text"/>
+                android:textSize="@dimen/popup_text"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </FrameLayout>

@@ -113,10 +113,10 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
         dialog.show(supportFragmentManager, null)
     }
 
-    protected open fun onScanEgg(code: Code) {
-        val competitionTag = intent.getStringExtra(Extras.COMPETITION_TAG)!!
+    protected open fun onScanEgg(code: Code): Boolean {
+        val result = competitionTag == code.ct
 
-        if (competitionTag != code.ct) {
+        if (!result) {
             val dialog = PopupDialog(
                 null,
                 R.string.error_different_competition,
@@ -125,6 +125,8 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
             dialog.show(supportFragmentManager, null)
         }
+
+        return result
     }
 
     private fun onScanHunter() {

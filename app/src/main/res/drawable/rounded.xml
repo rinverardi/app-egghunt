@@ -7,10 +7,10 @@
     <solid android:color="@color/white"/>
 
     <corners
-        android:bottomLeftRadius="@dimen/radius"
-        android:bottomRightRadius="@dimen/radius"
-        android:topLeftRadius="@dimen/radius"
-        android:topRightRadius="@dimen/radius"/>
+        android:bottomLeftRadius="@dimen/default_radius"
+        android:bottomRightRadius="@dimen/default_radius"
+        android:topLeftRadius="@dimen/default_radius"
+        android:topRightRadius="@dimen/default_radius"/>
 
     <stroke android:color="@color/primaryColor" android:width="1.25dp"/>
 </shape>

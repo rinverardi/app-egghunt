@@ -64,10 +64,14 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
         }.attach()
     }
 
-    override fun onScanEgg(code: Code) {
-        super.onScanEgg(code)
+    override fun onScanEgg(code: Code): Boolean {
+        val result = super.onScanEgg(code)
 
-        EggManager.hide(competition, code)
+        if (result) {
+            EggManager.hide(competition, code)
+        }
+
+        return result
     }
 
     // @remo Fix me!

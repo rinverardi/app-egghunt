@@ -12,7 +12,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hints"
         android:layout_height="0dp"
-        android:layout_marginVertical="@dimen/margin_s"
+        android:layout_marginVertical="@dimen/default_margin_s"
         android:layout_weight="1"
         android:layout_width="match_parent"/>
 
@@ -28,9 +28,9 @@
             android:importantForAutofill="no"
             android:inputType="textAutoCorrect"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_l"
+            android:layout_marginHorizontal="@dimen/default_margin_l"
             android:layout_width="match_parent"
-            android:padding="@dimen/padding_m"
+            android:padding="@dimen/default_padding_m"
             tools:ignore="LabelFor"/>
 
         <Button
@@ -38,7 +38,7 @@
             android:insetBottom="0dp"
             android:insetTop="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_l"
+            android:layout_margin="@dimen/default_margin_l"
             android:layout_width="match_parent"
             android:text="@string/button_post"/>
     </LinearLayout>

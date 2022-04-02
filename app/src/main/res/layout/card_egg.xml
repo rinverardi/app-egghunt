@@ -2,10 +2,10 @@
 
 <androidx.cardview.widget.CardView
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="@dimen/margin_l"
-    android:layout_marginVertical="@dimen/margin_s"
+    android:layout_marginHorizontal="@dimen/default_margin_l"
+    android:layout_marginVertical="@dimen/default_margin_s"
     android:layout_width="match_parent"
-    app:cardCornerRadius="@dimen/radius"
+    app:cardCornerRadius="@dimen/default_radius"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -16,8 +16,8 @@
 
     <TextView
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_l"
-        android:layout_marginTop="@dimen/margin_l"
+        android:layout_marginLeft="@dimen/default_margin_l"
+        android:layout_marginTop="@dimen/default_margin_l"
         android:layout_width="wrap_content"
         android:text="🥚"
         tools:ignore="HardcodedText"/>
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:padding="@dimen/padding_l">
+            android:padding="@dimen/default_padding_l">
 
             <TextView
                 android:id="@+id/description"
@@ -37,14 +37,14 @@
             <TextView
                 android:id="@+id/time_found"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginTop="@dimen/default_margin_s"
                 android:layout_width="match_parent"
                 android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/time_hidden"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_s"
+                android:layout_marginTop="@dimen/default_margin_s"
                 android:layout_width="match_parent"
                 android:visibility="gone"/>
         </LinearLayout>
