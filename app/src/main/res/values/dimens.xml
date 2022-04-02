@@ -13,4 +13,10 @@
 
     <dimen name="popup_margin">10dp</dimen>
     <dimen name="popup_text">16sp</dimen>
+
+    <dimen name="welcome_margin_s">10dp</dimen>
+    <dimen name="welcome_margin_l">20dp</dimen>
+    <dimen name="welcome_padding">15sp</dimen>
+    <dimen name="welcome_text_m">14sp</dimen>
+    <dimen name="welcome_text_l">18sp</dimen>
 </resources>

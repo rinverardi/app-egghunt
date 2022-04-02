@@ -13,6 +13,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.cardview.widget.CardView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import app.egghunt.R
@@ -41,6 +42,40 @@ class WelcomeActivity : AppCompatActivity() {
                 }
             }
         }
+
+    private fun animateCard(card: CardView) {
+        val animators = arrayOf(
+            ObjectAnimator.ofFloat(card, View.ALPHA, 0f, 1f),
+            ObjectAnimator.ofFloat(card, View.SCALE_X, 0.9f, 1f),
+            ObjectAnimator.ofFloat(card, View.SCALE_Y, 0.9f, 1f)
+        )
+
+        animators.forEach() {
+            it.duration = 400
+            it.startDelay = 800
+
+            it.start()
+        }
+    }
+
+    private fun animateEgg(egg: View) {
+        with(ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)) {
+            duration = (5000 + Math.random() * 1000).roundToLong()
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+
+            start()
+        }
+
+        with(ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)) {
+            duration = (2000 + Math.random() * 1000).roundToLong()
+            interpolator = BounceInterpolator()
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+
+            start()
+        }
+    }
 
     private fun autoLoginAsHunter(): Boolean {
         val hunter = LocalData.loadCurrentHunter(this)
@@ -101,11 +136,11 @@ class WelcomeActivity : AppCompatActivity() {
             return
         }
 
-        // Initialize the button.
+        // Animate the card.
 
-        findViewById<View>(R.id.button).setOnClickListener(this::onClickButton)
+        animateCard(findViewById(R.id.card))
 
-        // Initialize the eggs.
+        // Animate the eggs.
 
         val eggs = arrayOf<ImageView>(
             findViewById(R.id.egg0),
@@ -115,9 +150,12 @@ class WelcomeActivity : AppCompatActivity() {
         )
 
         eggs.forEach {
-            startRotation(it)
-            startTranslation(it)
+            animateEgg(it)
         }
+
+        // Initialize the button.
+
+        findViewById<View>(R.id.button).setOnClickListener(this::onClickButton)
     }
 
     override fun onRequestPermissionsResult(
@@ -179,25 +217,6 @@ class WelcomeActivity : AppCompatActivity() {
 
         scanLauncher.launch(intent)
     }
-
-    private fun startRotation(egg: View) =
-        with(ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)) {
-            duration = (5000 + Math.random() * 1000).roundToLong()
-            repeatCount = ValueAnimator.INFINITE
-            repeatMode = ValueAnimator.REVERSE
-
-            start()
-        }
-
-    private fun startTranslation(egg: View) =
-        with(ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)) {
-            duration = (2000 + Math.random() * 1000).roundToLong()
-            interpolator = BounceInterpolator()
-            repeatCount = ValueAnimator.INFINITE
-            repeatMode = ValueAnimator.REVERSE
-
-            start()
-        }
 
     companion object {
         private const val REQUEST_PERMISSION = 1

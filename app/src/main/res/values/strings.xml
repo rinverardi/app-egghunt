@@ -25,8 +25,8 @@
     <string name="time_found_by">Found at %s by %s</string>
     <string name="time_hidden">Hidden at %s</string>
     <string name="time_posted">Posted at %s</string>
-    <string name="title_welcome0">Welcome to the egg hunt!</string>
-    <string name="title_welcome1">Get started by scanning a code.</string>
+    <string name="title_welcome0">Welcome to the egg hunt! 👋</string>
+    <string name="title_welcome1">Get started by scanning an organizer code or a hunter code.</string>
     <string name="toast_camera_access_denied">Camera access denied.</string>
     <string name="toast_camera_access_granted">Camera access granted.</string>
     <string name="type_egg">Egg</string>
