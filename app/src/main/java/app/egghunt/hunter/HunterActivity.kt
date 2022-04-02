@@ -26,9 +26,9 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
     private lateinit var hunterTag: String
 
     private fun doFind() {
-        val intent = Intent(this, ScanActivity::class.java)
-
-        intent.putExtra(Extras.TITLE, R.string.activity_scan_egg)
+        val intent = Intent(this, ScanActivity::class.java).apply {
+            putExtra(Extras.TITLE, R.string.activity_scan_egg)
+        }
 
         scanLauncher.launch(intent)
     }
@@ -38,10 +38,10 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         // Remember the hunter.
 
-        val extras = intent.extras!!
-
-        hunterDescription = extras.getString(Extras.HUNTER_DESCRIPTION)!!
-        hunterTag = extras.getString(Extras.HUNTER_TAG)!!
+        with (intent.extras!!) {
+            hunterDescription = getString(Extras.HUNTER_DESCRIPTION)!!
+            hunterTag = getString(Extras.HUNTER_TAG)!!
+        }
 
         CompetitionManager.enterAsHunter(
             this,
@@ -67,11 +67,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         // Initialize the toolbar.
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
-
-        if (!TextUtils.isEmpty(hunterDescription)) {
-            toolbar.title = hunterDescription
-        }
+        findViewById<Toolbar>(R.id.toolbar)!!.title = hunterDescription
     }
 
     override fun onScanEgg(code: Code) {

@@ -48,12 +48,12 @@ class WelcomeActivity : AppCompatActivity() {
         return if (hunter == null) {
             false
         } else {
-            val intent = Intent(this, HunterActivity::class.java)
-
-            intent.putExtra(Extras.COMPETITION_DESCRIPTION, hunter[0])
-            intent.putExtra(Extras.COMPETITION_TAG, hunter[1])
-            intent.putExtra(Extras.HUNTER_DESCRIPTION, hunter[2])
-            intent.putExtra(Extras.HUNTER_TAG, hunter[3])
+            val intent = Intent(this, HunterActivity::class.java).apply {
+                putExtra(Extras.COMPETITION_DESCRIPTION, hunter[0])
+                putExtra(Extras.COMPETITION_TAG, hunter[1])
+                putExtra(Extras.HUNTER_DESCRIPTION, hunter[2])
+                putExtra(Extras.HUNTER_TAG, hunter[3])
+            }
 
             startActivity(intent)
             true
@@ -66,10 +66,10 @@ class WelcomeActivity : AppCompatActivity() {
         return if (organizer == null) {
             false
         } else {
-            val intent = Intent(this, OrganizerActivity::class.java)
-
-            intent.putExtra(Extras.COMPETITION_DESCRIPTION, organizer[0])
-            intent.putExtra(Extras.COMPETITION_TAG, organizer[1])
+            val intent = Intent(this, OrganizerActivity::class.java).apply {
+                putExtra(Extras.COMPETITION_DESCRIPTION, organizer[0])
+                putExtra(Extras.COMPETITION_TAG, organizer[1])
+            }
 
             startActivity(intent)
             true
@@ -114,11 +114,9 @@ class WelcomeActivity : AppCompatActivity() {
             findViewById(R.id.egg3)
         )
 
-        eggs.forEach { egg ->
-            run {
-                startRotation(egg)
-                startTranslation(egg)
-            }
+        eggs.forEach {
+            startRotation(it)
+            startTranslation(it)
         }
     }
 
@@ -145,10 +143,10 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onScanCompetition(code: Code) {
-        val intent = Intent(this, OrganizerActivity::class.java)
-
-        intent.putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(Extras.COMPETITION_TAG, code.ct)
+        val intent = Intent(this, OrganizerActivity::class.java).apply {
+            putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
+            putExtra(Extras.COMPETITION_TAG, code.ct)
+        }
 
         startActivity(intent)
         finish()
@@ -165,12 +163,12 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun onScanHunter(code: Code) {
-        val intent = Intent(this, HunterActivity::class.java)
-
-        intent.putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
-        intent.putExtra(Extras.COMPETITION_TAG, code.ct)
-        intent.putExtra(Extras.HUNTER_DESCRIPTION, code.hd)
-        intent.putExtra(Extras.HUNTER_TAG, code.ht)
+        val intent = Intent(this, HunterActivity::class.java).apply {
+            putExtra(Extras.COMPETITION_DESCRIPTION, code.cd)
+            putExtra(Extras.COMPETITION_TAG, code.ct)
+            putExtra(Extras.HUNTER_DESCRIPTION, code.hd)
+            putExtra(Extras.HUNTER_TAG, code.ht)
+        }
 
         startActivity(intent)
         finish()
@@ -182,26 +180,24 @@ class WelcomeActivity : AppCompatActivity() {
         scanLauncher.launch(intent)
     }
 
-    private fun startRotation(egg: View) {
-        val rotate = ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)
+    private fun startRotation(egg: View) =
+        with (ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)) {
+            duration = (5000 + Math.random() * 1000).roundToLong()
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
 
-        rotate.duration = (5000 + Math.random() * 1000).roundToLong()
-        rotate.repeatCount = ValueAnimator.INFINITE
-        rotate.repeatMode = ValueAnimator.REVERSE
+            start()
+        }
 
-        rotate.start()
-    }
+    private fun startTranslation(egg: View) =
+        with (ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)) {
+            duration = (2000 + Math.random() * 1000).roundToLong()
+            interpolator = BounceInterpolator()
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
 
-    private fun startTranslation(egg: View) {
-        val translate = ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)
-
-        translate.interpolator = BounceInterpolator()
-        translate.duration = (2000 + Math.random() * 1000).roundToLong()
-        translate.repeatCount = ValueAnimator.INFINITE
-        translate.repeatMode = ValueAnimator.REVERSE
-
-        translate.start()
-    }
+            start()
+        }
 
     companion object {
         private const val REQUEST_PERMISSION = 1

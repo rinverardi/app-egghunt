@@ -33,12 +33,12 @@ class HideActivity : AppCompatActivity(), OnMapReadyCallback {
     // @remo Fix me!
 
     override fun onMapReady(map: GoogleMap) {
-        this.map = map
-
         val position = LatLng(46.318457, 7.9923558)
 
-        this.map.addMarker(MarkerOptions().position(position))
-        this.map.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
+        this.map = map.apply {
+            addMarker(MarkerOptions().position(position))
+            moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15f))
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

@@ -13,12 +13,12 @@ object CompetitionManager {
         competitionDescription: String,
         competitionTag: String
     ) {
-        val intent = Intent(context, DeviceService::class.java)
+        val intent = Intent(context, DeviceService::class.java).apply {
+            action = Actions.ENTER_COMPETITION
 
-        intent.action = Actions.ENTER_COMPETITION
-
-        intent.putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
-        intent.putExtra(Extras.COMPETITION_TAG, competitionTag)
+            putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
+            putExtra(Extras.COMPETITION_TAG, competitionTag)
+        }
 
         context.startService(intent)
     }
@@ -58,12 +58,12 @@ object CompetitionManager {
     fun leave(context: Context, competitionDescription: String, competitionTag: String) {
         LocalData.clear(context)
 
-        val intent = Intent(context, DeviceService::class.java)
+        val intent = Intent(context, DeviceService::class.java).apply {
+            action = Actions.LEAVE_COMPETITION
 
-        intent.action = Actions.LEAVE_COMPETITION
-
-        intent.putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
-        intent.putExtra(Extras.COMPETITION_TAG, competitionTag)
+            putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
+            putExtra(Extras.COMPETITION_TAG, competitionTag)
+        }
 
         context.startService(intent)
     }

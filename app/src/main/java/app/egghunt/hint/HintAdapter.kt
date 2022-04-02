@@ -24,11 +24,11 @@ class HintAdapter(options: FirebaseRecyclerOptions<Hint>) :
         viewHolder: HintViewHolder,
         position: Int,
         hint: Hint
-    ) {
-        val context = recycler!!.context
+    ) = with (viewHolder) {
+        val context = itemView.context
 
-        viewHolder.text.text = hint.text
-        viewHolder.timePosted.text = sayPosted(context, hint)
+        text.text = hint.text
+        timePosted.text = sayPosted(context, hint)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HintViewHolder {

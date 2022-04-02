@@ -14,6 +14,7 @@
         android:id="@+id/toolbar"
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
+        app:navigationIcon="@drawable/ic_action_close"
         app:title="@string/activity_hunter"
         app:titleTextColor="@color/white"/>
 

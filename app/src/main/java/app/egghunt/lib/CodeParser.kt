@@ -4,18 +4,14 @@ import com.google.gson.Gson
 
 object CodeParser {
     private fun checkDescription(name: String, value: String?) {
-        if (value != null) {
-            if (value.length > 30) {
-                throw IllegalArgumentException(name)
-            }
+        if (value != null && value.length > 30) {
+            throw IllegalArgumentException(name)
         }
     }
 
     private fun checkTag(name: String, value: String?) {
-        if (value != null) {
-            if (!Regex("[0-9a-zA-Z]{6}").matches(value)) {
-                throw IllegalArgumentException(name)
-            }
+        if (value != null && !Regex("[0-9a-zA-Z]{6}").matches(value)) {
+            throw IllegalArgumentException(name)
         }
     }
 

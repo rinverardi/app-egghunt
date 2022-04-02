@@ -14,6 +14,7 @@
         android:background="@color/primaryColor"
         android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
+        app:navigationIcon="@drawable/ic_action_close"
         app:title="@string/activity_organizer"
         app:titleTextColor="@color/white"/>
 

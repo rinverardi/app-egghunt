@@ -6,13 +6,13 @@ import java.util.UUID
 
 object HintManager {
     fun post(competition: DatabaseReference, text: String) {
-        val hint = competition.child(Keys.HINT).child(tag())
-
         val time = System.currentTimeMillis()
 
-        hint.child(Keys.ORDER).setValue(-time)
-        hint.child(Keys.TEXT).setValue(text)
-        hint.child(Keys.TIME_POSTED).setValue(time)
+        with (competition.child(Keys.HINT).child(tag())) {
+            child(Keys.ORDER).setValue(-time)
+            child(Keys.TEXT).setValue(text)
+            child(Keys.TIME_POSTED).setValue(time)
+        }
     }
 
     private fun tag(): String = UUID.randomUUID().toString()

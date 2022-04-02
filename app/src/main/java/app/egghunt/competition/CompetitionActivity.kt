@@ -88,11 +88,7 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
         // Initialize the toolbar.
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)!!
-
-        toolbar.navigationIcon = AppCompatResources.getDrawable(this, R.drawable.ic_action_close)
-
-        toolbar.setNavigationOnClickListener {
+        findViewById<Toolbar>(R.id.toolbar)!!.setNavigationOnClickListener {
             doLogout()
         }
     }
@@ -129,7 +125,6 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
             )
 
             dialog.show(supportFragmentManager, null)
-            return
         }
     }
 

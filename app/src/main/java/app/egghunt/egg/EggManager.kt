@@ -11,18 +11,22 @@ object EggManager {
         hunterDescription: String,
         hunterTag: String
     ) {
-        val egg = competition.child(Keys.EGG).child(code.et!!)
+        val time = System.currentTimeMillis()
 
-        egg.child(Keys.DESCRIPTION).setValue(code.ed)
-        egg.child(Keys.HUNTER_DESCRIPTION).setValue(hunterDescription)
-        egg.child(Keys.HUNTER_TAG).setValue(hunterTag)
-        egg.child(Keys.TIME_FOUND).setValue(System.currentTimeMillis())
+        with (competition.child(Keys.EGG).child(code.et!!)) {
+            child(Keys.DESCRIPTION).setValue(code.ed)
+            child(Keys.HUNTER_DESCRIPTION).setValue(hunterDescription)
+            child(Keys.HUNTER_TAG).setValue(hunterTag)
+            child(Keys.TIME_FOUND).setValue(time)
+        }
     }
 
     fun hide(competition: DatabaseReference, code: Code) {
-        val egg = competition.child(Keys.EGG).child(code.et!!)
+        val time = System.currentTimeMillis()
 
-        egg.child(Keys.DESCRIPTION).setValue(code.ed)
-        egg.child(Keys.TIME_HIDDEN).setValue(System.currentTimeMillis())
+        with (competition.child(Keys.EGG).child(code.et!!)) {
+            child(Keys.DESCRIPTION).setValue(code.ed)
+            child(Keys.TIME_HIDDEN).setValue(time)
+        }
     }
 }

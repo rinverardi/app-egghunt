@@ -31,27 +31,27 @@ class ScanActivity : AppCompatActivity() {
 
         // Initialize the scanner.
 
-        scanner = CodeScanner(this, findViewById(R.id.scanner))
+        scanner = CodeScanner(this, findViewById(R.id.scanner)).apply {
+            autoFocusMode = AutoFocusMode.SAFE
+            camera = CodeScanner.CAMERA_BACK
 
-        scanner.autoFocusMode = AutoFocusMode.SAFE
-        scanner.camera = CodeScanner.CAMERA_BACK
+            decodeCallback = DecodeCallback { result ->
+                runOnUiThread {
+                    val intent = Intent()
 
-        scanner.decodeCallback = DecodeCallback { result ->
-            runOnUiThread {
-                val intent = Intent()
+                    intent.putExtra(Intent.EXTRA_TEXT, result.text)
 
-                intent.putExtra(Intent.EXTRA_TEXT, result.text)
-
-                setResult(Activity.RESULT_OK, intent)
-                finish()
+                    setResult(Activity.RESULT_OK, intent)
+                    finish()
+                }
             }
-        }
 
-        scanner.errorCallback = ErrorCallback.SUPPRESS
-        scanner.formats = listOf(BarcodeFormat.QR_CODE)
-        scanner.isAutoFocusEnabled = true
-        scanner.isFlashEnabled = false
-        scanner.scanMode = ScanMode.SINGLE
+            errorCallback = ErrorCallback.SUPPRESS
+            formats = listOf(BarcodeFormat.QR_CODE)
+            isAutoFocusEnabled = true
+            isFlashEnabled = false
+            scanMode = ScanMode.SINGLE
+        }
 
         // @remo Remove me!
 
@@ -87,14 +87,13 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+        if (item.itemId == android.R.id.home) {
             finish()
             true
         } else {
             super.onOptionsItemSelected(item)
         }
-    }
 
     override fun onResume() {
         super.onResume()

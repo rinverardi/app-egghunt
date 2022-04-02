@@ -9,11 +9,11 @@ object CompetitionRepo {
         competitionDescription: String,
         competitionTag: String,
     ): DatabaseReference {
-        val reference = RemoteData.open().getReference("${Keys.COMPETITION}/$competitionTag")
+        val database = RemoteData.instance
 
-        reference.child(Keys.DESCRIPTION).setValue(competitionDescription)
-        reference.keepSynced(true)
-
-        return reference
+        return database.getReference("${Keys.COMPETITION}/$competitionTag").apply {
+            child(Keys.DESCRIPTION).setValue(competitionDescription)
+            keepSynced(true)
+        }
     }
 }

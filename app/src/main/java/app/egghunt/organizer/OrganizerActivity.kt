@@ -27,9 +27,9 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     private var hintAdapter: HintAdapter? = null
 
     private fun doHide() {
-        val intent = Intent(this, ScanActivity::class.java)
-
-        intent.putExtra(Extras.TITLE, R.string.activity_scan_egg)
+        val intent = Intent(this, ScanActivity::class.java).apply {
+            putExtra(Extras.TITLE, R.string.activity_scan_egg)
+        }
 
         scanLauncher.launch(intent)
     }

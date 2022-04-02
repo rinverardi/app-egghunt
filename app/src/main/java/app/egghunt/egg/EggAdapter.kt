@@ -1,7 +1,6 @@
 package app.egghunt.egg
 
 import android.content.Context
-import android.text.TextUtils
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -18,32 +17,33 @@ class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
         viewHolder: EggViewHolder,
         position: Int,
         egg: Egg
-    ) {
-        val context = viewHolder.itemView.context
+    ) = with(viewHolder) {
+        val context = itemView.context
 
-        if (TextUtils.isEmpty(egg.description))
-            viewHolder.description.text = context.getString(R.string.type_egg)
-        else
-            viewHolder.description.text = egg.description
+        description.text = if (egg.description.isNullOrEmpty()) {
+            context.getString(R.string.type_egg)
+        } else {
+            egg.description
+        }
+
+        itemView.background = if (egg.timeFound == null) {
+            AppCompatResources.getDrawable(context, R.color.white)
+        } else {
+            AppCompatResources.getDrawable(context, R.color.green)
+        }
 
         if (egg.timeFound == null) {
-            viewHolder.itemView.background =
-                AppCompatResources.getDrawable(context, R.color.white)
-
-            viewHolder.timeFound.visibility = View.GONE
+            timeFound.visibility = View.GONE
         } else {
-            viewHolder.itemView.background =
-                AppCompatResources.getDrawable(context, R.color.green)
-
-            viewHolder.timeFound.text = sayFound(context, egg)
-            viewHolder.timeFound.visibility = View.VISIBLE
+            timeFound.text = sayFound(context, egg)
+            timeFound.visibility = View.VISIBLE
         }
 
         if (egg.timeFound != null || egg.timeHidden == null) {
-            viewHolder.timeHidden.visibility = View.GONE
+            timeHidden.visibility = View.GONE
         } else {
-            viewHolder.timeHidden.text = sayHidden(context, egg)
-            viewHolder.timeHidden.visibility = View.VISIBLE
+            timeHidden.text = sayHidden(context, egg)
+            timeHidden.visibility = View.VISIBLE
         }
     }
 

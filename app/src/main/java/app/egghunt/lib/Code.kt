@@ -8,7 +8,6 @@ data class Code(
     val hd: String?,
     val ht: String?
 ) {
-
     fun isEgg(): Boolean = et != null
 
     fun isHunter(): Boolean = ht != null
