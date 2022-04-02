@@ -24,7 +24,7 @@ class HintAdapter(options: FirebaseRecyclerOptions<Hint>) :
         viewHolder: HintViewHolder,
         position: Int,
         hint: Hint
-    ) = with (viewHolder) {
+    ) = with(viewHolder) {
         val context = itemView.context
 
         text.text = hint.text

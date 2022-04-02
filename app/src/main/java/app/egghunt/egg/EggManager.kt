@@ -13,7 +13,7 @@ object EggManager {
     ) {
         val time = System.currentTimeMillis()
 
-        with (competition.child(Keys.EGG).child(code.et!!)) {
+        with(competition.child(Keys.EGG).child(code.et!!)) {
             child(Keys.DESCRIPTION).setValue(code.ed)
             child(Keys.HUNTER_DESCRIPTION).setValue(hunterDescription)
             child(Keys.HUNTER_TAG).setValue(hunterTag)
@@ -24,7 +24,7 @@ object EggManager {
     fun hide(competition: DatabaseReference, code: Code) {
         val time = System.currentTimeMillis()
 
-        with (competition.child(Keys.EGG).child(code.et!!)) {
+        with(competition.child(Keys.EGG).child(code.et!!)) {
             child(Keys.DESCRIPTION).setValue(code.ed)
             child(Keys.TIME_HIDDEN).setValue(time)
         }

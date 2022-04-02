@@ -2,7 +2,6 @@ package app.egghunt.hunter
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
@@ -38,7 +37,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         // Remember the hunter.
 
-        with (intent.extras!!) {
+        with(intent.extras!!) {
             hunterDescription = getString(Extras.HUNTER_DESCRIPTION)!!
             hunterTag = getString(Extras.HUNTER_TAG)!!
         }

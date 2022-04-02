@@ -181,7 +181,7 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun startRotation(egg: View) =
-        with (ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)) {
+        with(ObjectAnimator.ofFloat(egg, View.ROTATION, -20f, 20f)) {
             duration = (5000 + Math.random() * 1000).roundToLong()
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.REVERSE
@@ -190,7 +190,7 @@ class WelcomeActivity : AppCompatActivity() {
         }
 
     private fun startTranslation(egg: View) =
-        with (ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)) {
+        with(ObjectAnimator.ofFloat(egg, View.TRANSLATION_Y, -300f, 0f)) {
             duration = (2000 + Math.random() * 1000).roundToLong()
             interpolator = BounceInterpolator()
             repeatCount = ValueAnimator.INFINITE

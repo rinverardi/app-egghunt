@@ -8,7 +8,6 @@ import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.appcompat.widget.Toolbar
 import app.egghunt.R
 import app.egghunt.lib.Actions
