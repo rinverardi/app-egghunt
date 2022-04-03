@@ -36,6 +36,7 @@ class WelcomeActivity : AppCompatActivity() {
                 val code = CodeParser.parse(codeString)
 
                 when {
+                    code == null -> onCrappyCode()
                     code.isEgg() -> onScanEgg()
                     code.isHunter() -> onScanHunter(code)
                     else -> onScanCompetition(code)
@@ -124,6 +125,16 @@ class WelcomeActivity : AppCompatActivity() {
         } else {
             scan()
         }
+    }
+
+    private fun onCrappyCode() {
+        val dialog = PopupDialog(
+            null,
+            R.string.error_crappy_code,
+            R.string.exclamation_no
+        )
+
+        dialog.show(supportFragmentManager, null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
