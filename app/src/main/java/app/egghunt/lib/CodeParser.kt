@@ -1,39 +1,37 @@
 package app.egghunt.lib
 
+import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
 
 object CodeParser {
-    private fun checkDescription(name: String, value: String?) {
-        if (value != null && value.length > 30) {
-            throw IllegalArgumentException(name)
-        }
-    }
+    private fun allowDescription(value: String?): Boolean =
+        value == null || value.length <= 30
 
-    private fun checkTag(name: String, value: String?) {
-        if (value != null && !Regex("[0-9a-zA-Z]{6}").matches(value)) {
-            throw IllegalArgumentException(name)
-        }
-    }
+    private fun allowTag(value: String?): Boolean =
+        value == null || Regex("[0-9a-zA-Z]{6}").matches(value)
+
+    private fun requireTag(value: String?): Boolean =
+        value != null && allowTag(value)
 
     fun parse(codeString: String): Code? {
-
-        // abort if qr code does not contain competition tag
-        if (!codeString.contains("ct")) {
-            return null
-        }
-
-        return try {
+        try {
             val code = Gson().fromJson(codeString, Code::class.java)
-            checkDescription("cd", code.cd)
-            checkTag("ct", code.ct)
-            checkDescription("ed", code.ed)
-            checkTag("et", code.et)
-            checkDescription("hd", code.hd)
-            checkTag("ht", code.ht)
-            code
-        } catch(exception: IllegalArgumentException) {
-            return null
-        }
-    }
 
+            if (
+                allowDescription(code.cd) &&
+                requireTag(code.ct) &&
+                allowDescription(code.ed) &&
+                allowTag(code.et) &&
+                allowDescription(code.hd) &&
+                allowTag(code.ht)
+            ) {
+                return code
+            }
+        } catch (exception: JsonSyntaxException) {
+            Log.wtf(javaClass.simpleName, exception)
+        }
+
+        return null
+    }
 }
