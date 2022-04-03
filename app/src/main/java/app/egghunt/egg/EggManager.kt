@@ -6,8 +6,8 @@ import com.google.firebase.database.DatabaseReference
 
 object EggManager {
     fun find(
-        competition: DatabaseReference,
         code: Code,
+        competition: DatabaseReference,
         hunterDescription: String,
         hunterTag: String
     ) {
@@ -23,7 +23,7 @@ object EggManager {
         )
     }
 
-    fun hide(competition: DatabaseReference, code: Code) {
+    fun hide(code: Code, competition: DatabaseReference) {
         val time = System.currentTimeMillis()
 
         competition.child(Keys.EGG).child(code.et!!).updateChildren(
