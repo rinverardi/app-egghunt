@@ -36,6 +36,7 @@ class WelcomeActivity : AppCompatActivity() {
                 val code = CodeParser.parse(codeString)
 
                 when {
+                    code == null -> onScanCrappyCode()
                     code.isEgg() -> onScanEgg()
                     code.isHunter() -> onScanHunter(code)
                     else -> onScanCompetition(code)
@@ -210,6 +211,16 @@ class WelcomeActivity : AppCompatActivity() {
 
         startActivity(intent)
         finish()
+    }
+
+    private fun onScanCrappyCode() {
+        val dialog = PopupDialog(
+            null,
+            R.string.error_unexpected_code,
+            R.string.exclamation_no
+        )
+
+        dialog.show(supportFragmentManager, null)
     }
 
     private fun scan() {

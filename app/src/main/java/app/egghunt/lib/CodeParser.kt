@@ -15,16 +15,25 @@ object CodeParser {
         }
     }
 
-    fun parse(codeString: String): Code {
-        val code = Gson().fromJson(codeString, Code::class.java)
+    fun parse(codeString: String): Code? {
 
-        checkDescription("cd", code.cd)
-        checkTag("ct", code.ct)
-        checkDescription("ed", code.ed)
-        checkTag("et", code.et)
-        checkDescription("hd", code.hd)
-        checkTag("ht", code.ht)
+        // abort if qr code does not contain competition tag
+        if (!codeString.contains("ct")) {
+            return null
+        }
 
-        return code
+        return try {
+            val code = Gson().fromJson(codeString, Code::class.java)
+            checkDescription("cd", code.cd)
+            checkTag("ct", code.ct)
+            checkDescription("ed", code.ed)
+            checkTag("et", code.et)
+            checkDescription("hd", code.hd)
+            checkTag("ht", code.ht)
+            code
+        } catch(exception: IllegalArgumentException) {
+            return null
+        }
     }
+
 }
