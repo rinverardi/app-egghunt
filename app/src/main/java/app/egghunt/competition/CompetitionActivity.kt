@@ -41,7 +41,7 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
                 val code = CodeParser.parse(codeString)
 
                 when {
-                    code == null -> onScanCrappyCode()
+                    code == null -> onCrappyCode()
                     code.isEgg() -> onScanEgg(code)
                     code.isHunter() -> onScanHunter()
                     else -> onScanCompetition()
@@ -61,6 +61,16 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
             Actions.LOGOUT,
             R.string.warning_logout,
             R.string.exclamation_whoa
+        )
+
+        dialog.show(supportFragmentManager, null)
+    }
+
+    private fun onCrappyCode() {
+        val dialog = PopupDialog(
+            null,
+            R.string.error_crappy_code,
+            R.string.exclamation_no
         )
 
         dialog.show(supportFragmentManager, null)
@@ -135,16 +145,6 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
             null,
             R.string.error_unexpected_hunter,
             R.string.exclamation_oops
-        )
-
-        dialog.show(supportFragmentManager, null)
-    }
-
-    private fun onScanCrappyCode() {
-        val dialog = PopupDialog(
-            null,
-            R.string.error_unexpected_code,
-            R.string.exclamation_no
         )
 
         dialog.show(supportFragmentManager, null)

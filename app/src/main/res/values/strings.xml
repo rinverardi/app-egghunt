@@ -13,12 +13,12 @@
     <string name="button_logout">Logout</string>
     <string name="button_post">Post</string>
     <string name="button_scan">Scan a code</string>
+    <string name="error_crappy_code">You can\'t just scan every crappy code you find lying around…</string>
     <string name="error_different_competition">You just scanned an egg code from a different competition. Put it back before someone notices!</string>
-    <string name="error_unexpected_code">You can\'t just scan every crappy code you find lying around...</string>
     <string name="error_unexpected_competition">You just scanned a competition code. Please scan an egg code instead!</string>
     <string name="error_unexpected_egg">You just scanned an egg code. Please scan a competition code or a hunter code instead.</string>
     <string name="error_unexpected_hunter">You just scanned a hunter code. Please scan an egg code instead!</string>
-    <string name="exclamation_no">Oh no, you don\'t!</string>
+    <string name="exclamation_no">Oh no, you don\'t! 😡</string>
     <string name="exclamation_oops">Oops! 😬</string>
     <string name="exclamation_psst">Psst! 🤫</string>
     <string name="exclamation_whoa">Whoa! 😯</string>
