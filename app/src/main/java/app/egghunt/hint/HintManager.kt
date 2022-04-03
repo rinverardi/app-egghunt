@@ -8,11 +8,13 @@ object HintManager {
     fun post(competition: DatabaseReference, text: String) {
         val time = System.currentTimeMillis()
 
-        with(competition.child(Keys.HINT).child(tag())) {
-            child(Keys.ORDER).setValue(-time)
-            child(Keys.TEXT).setValue(text)
-            child(Keys.TIME_POSTED).setValue(time)
-        }
+        competition.child(Keys.HINT).child(tag()).setValue(
+            mapOf(
+                Keys.ORDER to -time,
+                Keys.TEXT to text,
+                Keys.TIME_POSTED to time
+            )
+        )
     }
 
     private fun tag(): String = UUID.randomUUID().toString()
