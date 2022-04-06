@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
@@ -141,6 +142,15 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
 
         postButton?.setOnClickListener {
             doPost()
+        }
+
+        // Initialize the scores.
+
+        val scoreRecycler: RecyclerView? = findViewById(R.id.scores)
+
+        scoreRecycler?.apply {
+            adapter = scoreAdapter
+            layoutManager = LinearLayoutManager(scoreRecycler.context)
         }
     }
 }
