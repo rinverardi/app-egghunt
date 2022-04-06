@@ -8,13 +8,6 @@ import com.google.firebase.database.DatabaseReference
 
 object EggRepo {
     fun bind(competition: DatabaseReference, recycler: RecyclerView): EggAdapter {
-
-        // Assign the layout manager.
-
-        recycler.layoutManager = LinearLayoutManager(recycler.context)
-
-        // Assign the adapter.
-
         val query = competition.child(Keys.EGG).orderByChild(Keys.DESCRIPTION)
 
         val adapter = EggAdapter(
@@ -24,6 +17,7 @@ object EggRepo {
         )
 
         recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(recycler.context)
 
         adapter.startListening()
 

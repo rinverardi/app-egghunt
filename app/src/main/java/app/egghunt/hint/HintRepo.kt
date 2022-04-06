@@ -8,13 +8,6 @@ import com.google.firebase.database.DatabaseReference
 
 object HintRepo {
     fun bind(competition: DatabaseReference, recycler: RecyclerView): HintAdapter {
-
-        // Assign the layout manager.
-
-        recycler.layoutManager = LinearLayoutManager(recycler.context)
-
-        // Assign the adapter.
-
         val query = competition.child(Keys.HINT).orderByChild(Keys.ORDER)
 
         val adapter = HintAdapter(
@@ -24,6 +17,7 @@ object HintRepo {
         )
 
         recycler.adapter = adapter
+        recycler.layoutManager = LinearLayoutManager(recycler.context)
 
         adapter.startListening()
 

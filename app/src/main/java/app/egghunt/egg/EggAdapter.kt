@@ -21,7 +21,7 @@ class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
         val context = itemView.context
 
         description.text = if (egg.description.isNullOrEmpty()) {
-            context.getString(R.string.type_egg)
+            context.getString(R.string.egg)
         } else {
             egg.description
         }

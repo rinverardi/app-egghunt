@@ -7,21 +7,22 @@ import com.google.firebase.messaging.RemoteMessage
 
 class MessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
-        val intent = Intent()
+        val intent = Intent().apply {
+            action = Actions.NEW_MESSAGE
 
-        intent.action = Actions.NEW_MESSAGE
-
-        intent.putExtra(Extras.BODY, message.notification!!.body)
-        intent.putExtra(Extras.TITLE, message.notification!!.title)
+            putExtra(Extras.BODY, message.notification!!.body)
+            putExtra(Extras.TITLE, message.notification!!.title)
+        }
 
         sendBroadcast(intent)
     }
 
     override fun onNewToken(token: String) {
-        val intent = Intent(applicationContext, DeviceService::class.java)
+        val intent = Intent(applicationContext, DeviceService::class.java).apply {
+            action = Actions.NEW_TOKEN
 
-        intent.action = Actions.NEW_TOKEN
-        intent.putExtra(Extras.TOKEN, token)
+            putExtra(Extras.TOKEN, token)
+        }
 
         startService(intent)
     }

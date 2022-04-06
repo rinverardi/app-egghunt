@@ -6,21 +6,29 @@ import app.egghunt.device.DeviceService
 import app.egghunt.lib.Actions
 import app.egghunt.lib.Extras
 import app.egghunt.lib.LocalData
+import app.egghunt.score.ScoreService
 
 object CompetitionManager {
+    private val SERVICES = listOf(
+        DeviceService::class.java,
+        ScoreService::class.java
+    )
+
     private fun enter(
         context: Context,
         competitionDescription: String,
         competitionTag: String
     ) {
-        val intent = Intent(context, DeviceService::class.java).apply {
-            action = Actions.ENTER_COMPETITION
+        SERVICES.forEach { service ->
+            val intent = Intent(context, service).apply {
+                action = Actions.ENTER_COMPETITION
 
-            putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
-            putExtra(Extras.COMPETITION_TAG, competitionTag)
+                putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
+                putExtra(Extras.COMPETITION_TAG, competitionTag)
+            }
+
+            context.startService(intent)
         }
-
-        context.startService(intent)
     }
 
     fun enterAsHunter(
@@ -58,13 +66,15 @@ object CompetitionManager {
     fun leave(context: Context, competitionDescription: String, competitionTag: String) {
         LocalData.clear(context)
 
-        val intent = Intent(context, DeviceService::class.java).apply {
-            action = Actions.LEAVE_COMPETITION
+        SERVICES.forEach { service ->
+            val intent = Intent(context, service).apply {
+                action = Actions.LEAVE_COMPETITION
 
-            putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
-            putExtra(Extras.COMPETITION_TAG, competitionTag)
+                putExtra(Extras.COMPETITION_DESCRIPTION, competitionDescription)
+                putExtra(Extras.COMPETITION_TAG, competitionTag)
+            }
+
+            context.startService(intent)
         }
-
-        context.startService(intent)
     }
 }

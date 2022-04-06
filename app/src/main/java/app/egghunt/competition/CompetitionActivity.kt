@@ -17,14 +17,18 @@ import app.egghunt.lib.Extras
 import app.egghunt.lib.Messaging
 import app.egghunt.lib.PopupDialog
 import app.egghunt.lib.PopupNotification
+import app.egghunt.score.Rank
+import app.egghunt.score.ScoreAdapter
 import app.egghunt.welcome.WelcomeActivity
 import com.google.firebase.database.DatabaseReference
+import com.google.gson.Gson
 
 abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity() {
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            if (intent.action == Actions.NEW_MESSAGE) {
-                onNewMessage(intent)
+            when (intent.action) {
+                Actions.NEW_MESSAGE -> onNewMessage(intent)
+                Actions.NEW_SCORES -> onNewScores(intent)
             }
         }
     }
@@ -32,6 +36,7 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
     protected lateinit var competition: DatabaseReference
     protected lateinit var competitionDescription: String
     protected lateinit var competitionTag: String
+    protected val scoreAdapter = ScoreAdapter()
 
     protected val scanLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -81,6 +86,15 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
         setContentView(layout)
 
+        // Listen for broadcasts.
+
+        val intentFilter = IntentFilter().apply {
+            addAction(Actions.NEW_MESSAGE)
+            addAction(Actions.NEW_SCORES)
+        }
+
+        registerReceiver(broadcastReceiver, intentFilter)
+
         // Attach the database.
 
         val extras = intent.extras!!
@@ -91,8 +105,6 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
         competition = CompetitionRepo.sync(competitionDescription, competitionTag)
 
         // Attach the messaging.
-
-        registerReceiver(broadcastReceiver, IntentFilter(Actions.NEW_MESSAGE))
 
         Messaging.register(this)
 
@@ -113,6 +125,20 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
         .setBody(intent.getStringExtra(Extras.BODY)!!)
         .setTitle(intent.getStringExtra(Extras.TITLE)!!)
         .show()
+
+    private fun onNewScores(intent: Intent) {
+        val list = ArrayList<Any>()
+
+        Gson().fromJson(
+            intent.getStringExtra(Extras.RANKS)!!,
+            Array<Rank>::class.java
+        ).forEach {
+            list.add(it)
+            list.addAll(it.scores)
+        }
+
+        scoreAdapter.submitList(list)
+    }
 
     private fun onScanCompetition() {
         val dialog = PopupDialog(
