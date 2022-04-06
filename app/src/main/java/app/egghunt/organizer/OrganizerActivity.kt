@@ -37,9 +37,11 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     private fun doPost() {
         val edit: EditText = findViewById(R.id.hint)
 
-        HintManager.post(competition, edit.text.toString())
+        if (edit.text.isNotEmpty()) {
+            HintManager.post(competition, edit.text.toString())
 
-        edit.text.clear()
+            edit.text.clear()
+        }
     }
 
     override fun onCreate(state: Bundle?) {
