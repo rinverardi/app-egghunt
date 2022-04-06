@@ -68,7 +68,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
         val result = super.onScanEgg(code)
 
         if (result) {
-            EggManager.hide(competition, code)
+            EggManager.hide(code, competition)
         }
 
         return result
