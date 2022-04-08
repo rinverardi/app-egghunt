@@ -146,7 +146,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
 
         // Initialize the scores.
 
-        val scoreRecycler: RecyclerView? = findViewById(R.id.scores)
+        val scoreRecycler: RecyclerView? = tab.findViewById(R.id.scores)
 
         scoreRecycler?.apply {
             adapter = scoreAdapter
