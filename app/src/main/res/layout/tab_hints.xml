@@ -24,7 +24,7 @@
         <EditText
             android:background="@drawable/rounded"
             android:hint="@string/hint"
-            android:id="@+id/hint"
+            android:id="@+id/edit_post"
             android:importantForAutofill="no"
             android:inputType="textAutoCorrect"
             android:layout_height="wrap_content"

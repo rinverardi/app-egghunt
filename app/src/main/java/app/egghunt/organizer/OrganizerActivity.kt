@@ -36,7 +36,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     }
 
     private fun doPost() {
-        val edit: EditText = findViewById(R.id.hint)
+        val edit: EditText = findViewById(R.id.edit_post)
 
         if (edit.text.isNotEmpty()) {
             HintManager.post(competition, edit.text.toString())
@@ -63,7 +63,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
         val tabs: TabLayout = findViewById(R.id.tabs)
 
         TabLayoutMediator(tabs, pager) { tab, tabPosition ->
-            tab.text = resources.getStringArray(R.array.tabs_organizer)[tabPosition]
+            tab.text = resources.getStringArray(R.array.tabs)[tabPosition]
         }.attach()
     }
 
@@ -118,39 +118,26 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
             hintAdapter?.stopListening()
             hintAdapter = HintRepo.bind(competition, hintRecycler)
         }
-    }
 
-    fun reinitialize(tab: View) {
-
-        // Initialize the 'find' button.
-
-        val findButton: Button? = tab.findViewById(R.id.button_find)
-
-        findButton?.visibility = View.GONE
-
-        // Initialize the 'hide' button.
-
-        val hintButton: Button? = tab.findViewById(R.id.button_hide)
-
-        hintButton?.setOnClickListener {
-            doHide()
-        }
-
-        // Initialize the 'post' button.
-
-        val postButton: Button? = tab.findViewById(R.id.button_post)
-
-        postButton?.setOnClickListener {
-            doPost()
-        }
-
-        // Initialize the scores.
+        // Bind the scores.
 
         val scoreRecycler: RecyclerView? = tab.findViewById(R.id.scores)
 
         scoreRecycler?.apply {
             adapter = scoreAdapter
             layoutManager = LinearLayoutManager(scoreRecycler.context)
+        }
+    }
+
+    fun reinitialize(tab: View) {
+        tab.findViewById<View>(R.id.button_find)?.visibility = View.GONE
+
+        tab.findViewById<Button>(R.id.button_hide)?.setOnClickListener {
+            doHide()
+        }
+
+        tab.findViewById<Button>(R.id.button_post)?.setOnClickListener {
+            doPost()
         }
     }
 }

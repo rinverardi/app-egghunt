@@ -42,12 +42,7 @@
         <item>🥉</item>
     </array>
 
-    <array name="tabs_hunter">
-        <item>Eggs</item>
-        <item>Scores</item>
-    </array>
-
-    <array name="tabs_organizer">
+    <array name="tabs">
         <item>Eggs</item>
         <item>Scores</item>
         <item>Hints</item>

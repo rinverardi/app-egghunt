@@ -15,6 +15,8 @@ import app.egghunt.competition.CompetitionManager
 import app.egghunt.egg.EggAdapter
 import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
+import app.egghunt.hint.HintAdapter
+import app.egghunt.hint.HintRepo
 import app.egghunt.lib.Code
 import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
@@ -22,6 +24,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
     private var eggAdapter: EggAdapter? = null
+    private var hintAdapter: HintAdapter? = null
     private lateinit var hunterDescription: String
     private lateinit var hunterTag: String
 
@@ -62,7 +65,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         val tabs: TabLayout = findViewById(R.id.tabs)
 
         TabLayoutMediator(tabs, pager) { tab, tabPosition ->
-            tab.text = resources.getStringArray(R.array.tabs_hunter)[tabPosition]
+            tab.text = resources.getStringArray(R.array.tabs)[tabPosition]
         }.attach()
 
         // Initialize the toolbar.
@@ -110,25 +113,17 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
             eggAdapter?.stopListening()
             eggAdapter = EggRepo.bind(competition, eggRecycler)
         }
-    }
 
-    fun reinitialize(tab: View) {
+        // Bind the hints.
 
-        // Initialize the 'find' button.
+        val hintRecycler: RecyclerView? = tab.findViewById(R.id.hints)
 
-        val findButton: Button? = tab.findViewById(R.id.button_find)
-
-        findButton?.setOnClickListener {
-            doFind()
+        if (hintRecycler != null) {
+            hintAdapter?.stopListening()
+            hintAdapter = HintRepo.bind(competition, hintRecycler)
         }
 
-        // Initialize the 'hide' button.
-
-        val hideButton: Button? = tab.findViewById(R.id.button_hide)
-
-        hideButton?.visibility = View.GONE
-
-        // Initialize the scores.
+        // Bind the scores.
 
         val scoreRecycler: RecyclerView? = tab.findViewById(R.id.scores)
 
@@ -136,5 +131,15 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
             adapter = scoreAdapter
             layoutManager = LinearLayoutManager(scoreRecycler.context)
         }
+    }
+
+    fun reinitialize(tab: View) {
+        tab.findViewById<Button>(R.id.button_find)?.setOnClickListener {
+            doFind()
+        }
+
+        tab.findViewById<View>(R.id.button_hide)?.visibility = View.GONE
+        tab.findViewById<View>(R.id.button_post)?.visibility = View.GONE
+        tab.findViewById<View>(R.id.edit_post)?.visibility = View.GONE
     }
 }
