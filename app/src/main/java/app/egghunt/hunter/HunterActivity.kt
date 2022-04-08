@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
@@ -126,5 +127,14 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         val hideButton: Button? = tab.findViewById(R.id.button_hide)
 
         hideButton?.visibility = View.GONE
+
+        // Initialize the scores.
+
+        val scoreRecycler: RecyclerView? = tab.findViewById(R.id.scores)
+
+        scoreRecycler?.apply {
+            adapter = scoreAdapter
+            layoutManager = LinearLayoutManager(scoreRecycler.context)
+        }
     }
 }
