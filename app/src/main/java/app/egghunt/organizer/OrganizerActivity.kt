@@ -1,18 +1,23 @@
 package app.egghunt.organizer
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
+import app.egghunt.action.position.PositionActivity
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.competition.CompetitionActivity
 import app.egghunt.competition.CompetitionManager
+import app.egghunt.egg.Egg
 import app.egghunt.egg.EggAdapter
+import app.egghunt.egg.EggListener
 import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
 import app.egghunt.hint.HintAdapter
@@ -25,7 +30,34 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     private var eggAdapter: EggAdapter? = null
+
+    private val eggListener = object : EggListener {
+        override fun onClick(egg: Egg) {
+            val context = this@OrganizerActivity
+
+            val intent = Intent(context, PositionActivity::class.java).apply {
+                putExtra(Extras.EGG_TAG, egg.tag)
+                putExtra(Extras.POSITION_LATITUDE, egg.positionLatitude)
+                putExtra(Extras.POSITION_LONGITUDE, egg.positionLongitude)
+            }
+
+            positionLauncher.launch(intent)
+        }
+    }
+
     private var hintAdapter: HintAdapter? = null
+
+    private val positionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                EggManager.position(
+                    competition,
+                    result.data!!.getStringExtra(Extras.EGG_TAG)!!,
+                    Extras.getPositionLatitude(result.data),
+                    Extras.getPositionLongitude(result.data)
+                )
+            }
+        }
 
     private fun doHide() {
         val intent = Intent(this, ScanActivity::class.java).apply {
@@ -71,7 +103,13 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
         val result = super.onScanEgg(code)
 
         if (result) {
-            EggManager.hide(code, competition)
+            EggManager.hide(competition, code.ed!!, code.et!!)
+
+            val intent = Intent(this, PositionActivity::class.java).apply {
+                putExtra(Extras.EGG_TAG, code.et)
+            }
+
+            positionLauncher.launch(intent)
         }
 
         return result
@@ -107,7 +145,7 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
 
         if (eggRecycler != null) {
             eggAdapter?.stopListening()
-            eggAdapter = EggRepo.bind(competition, eggRecycler)
+            eggAdapter = EggRepo.bind(competition, eggListener, eggRecycler)
         }
 
         // Bind the hints.

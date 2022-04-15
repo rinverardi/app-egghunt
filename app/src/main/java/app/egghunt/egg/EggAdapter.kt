@@ -10,7 +10,7 @@ import app.egghunt.R
 import com.firebase.ui.database.FirebaseRecyclerAdapter
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
-class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
+class EggAdapter(private val listener: EggListener?, options: FirebaseRecyclerOptions<Egg>) :
     FirebaseRecyclerAdapter<Egg, EggViewHolder>(options) {
 
     override fun onBindViewHolder(
@@ -30,6 +30,10 @@ class EggAdapter(options: FirebaseRecyclerOptions<Egg>) :
             AppCompatResources.getDrawable(context, R.color.white)
         } else {
             AppCompatResources.getDrawable(context, R.color.green)
+        }
+
+        if (listener != null) {
+            itemView.setOnClickListener { listener.onClick(egg) }
         }
 
         if (egg.timeFound == null) {

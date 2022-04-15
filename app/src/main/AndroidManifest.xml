@@ -7,6 +7,8 @@
     <uses-feature android:name="android.hardware.camera" android:required="true"/>
     <uses-feature android:name="android.hardware.camera.autofocus"/>
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.CAMERA"/>
 
     <application
@@ -18,8 +20,8 @@
         android:theme="@style/Theme.EggHunt">
 
         <activity
-            android:label="@string/activity_hide"
-            android:name=".action.hide.HideActivity"/>
+            android:label="@string/activity_position"
+            android:name=".action.position.PositionActivity"/>
 
         <activity
             android:label="@string/activity_scan"
