@@ -11,6 +11,8 @@ object Keys {
     const val HUNTER_DESCRIPTION = "hunterDescription"
     const val HUNTER_TAG = "hunterTag"
     const val ORDER = "order"
+    const val POSITION_LATITUDE = "positionLatitude"
+    const val POSITION_LONGITUDE = "positionLongitude"
     const val TEXT = "text"
     const val TIME_FOUND = "timeFound"
     const val TIME_HIDDEN = "timeHidden"

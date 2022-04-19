@@ -37,11 +37,10 @@ class ScanActivity : AppCompatActivity() {
 
             decodeCallback = DecodeCallback { result ->
                 runOnUiThread {
-                    val intent = Intent()
+                    setResult(Activity.RESULT_OK, Intent().apply {
+                        putExtra(Intent.EXTRA_TEXT, result.text)
+                    })
 
-                    intent.putExtra(Intent.EXTRA_TEXT, result.text)
-
-                    setResult(Activity.RESULT_OK, intent)
                     finish()
                 }
             }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
+    android:foreground="?android:attr/selectableItemBackground"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/default_margin_l"
     android:layout_marginVertical="@dimen/default_margin_s"

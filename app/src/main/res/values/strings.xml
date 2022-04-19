@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-    <string name="activity_hide">Hide an egg</string>
     <string name="activity_hunter">Hunter</string>
+    <string name="activity_map">Map</string>
     <string name="activity_organizer">Organizer</string>
+    <string name="activity_position">Where\'s the egg?</string>
     <string name="activity_scan">Scan a code</string>
     <string name="activity_scan_egg">Scan an egg code</string>
     <string name="activity_welcome">Egg Hunt</string>
@@ -34,6 +35,8 @@
     <string name="title_welcome1">Get started by scanning an organizer code or a hunter code.</string>
     <string name="toast_camera_access_denied">Camera access denied.</string>
     <string name="toast_camera_access_granted">Camera access granted.</string>
+    <string name="toast_location_access_denied">Location access denied.</string>
+    <string name="toast_location_access_granted">Location access granted.</string>
     <string name="warning_logout">If you log out now, you\'ll need an organizer code or a hunter code to log back in!</string>
 
     <array name="medals">

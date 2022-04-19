@@ -77,7 +77,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         val result = super.onScanEgg(code)
 
         if (result) {
-            EggManager.find(code, competition, hunterDescription, hunterTag)
+            EggManager.find(competition, code.ed!!, code.et!!, hunterDescription, hunterTag)
         }
 
         return result
@@ -111,7 +111,7 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         if (eggRecycler != null) {
             eggAdapter?.stopListening()
-            eggAdapter = EggRepo.bind(competition, eggRecycler)
+            eggAdapter = EggRepo.bind(competition, null, eggRecycler)
         }
 
         // Bind the hints.
