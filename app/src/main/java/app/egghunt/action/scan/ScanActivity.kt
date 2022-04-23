@@ -3,9 +3,10 @@ package app.egghunt.action.scan
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import app.egghunt.BuildConfig
 import app.egghunt.R
 import app.egghunt.lib.Extras
 import com.budiyev.android.codescanner.AutoFocusMode
@@ -51,48 +52,88 @@ class ScanActivity : AppCompatActivity() {
             isFlashEnabled = false
             scanMode = ScanMode.SINGLE
         }
+    }
 
-        // @remo Remove me!
-
-        findViewById<Button>(R.id.c).setOnClickListener {
-            intent.putExtra(Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"The Competition\"," +
-                    "\"ct\":\"CCCCCC\"}")
-
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-        }
-
-        findViewById<Button>(R.id.e).setOnClickListener {
-            intent.putExtra(Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"The Competition\"," +
-                    "\"ct\":\"CCCCCC\"," +
-                    "\"ed\":\"The Egg\"," +
-                    "\"et\":\"EEEEEE\"}")
-
-            setResult(Activity.RESULT_OK, intent)
-            finish()
-        }
-
-        findViewById<Button>(R.id.h).setOnClickListener {
-            intent.putExtra(Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"The Competition\"," +
-                    "\"ct\":\"CCCCCC\"," +
-                    "\"hd\":\"The Hunter\"," +
-                    "\"ht\":\"HHHHHH\"}")
-
-            setResult(Activity.RESULT_OK, intent)
-            finish()
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        return if (BuildConfig.DEBUG) {
+            menuInflater.inflate(R.menu.menu_scan, menu)
+            true
+        } else {
+            super.onCreateOptionsMenu(menu)
         }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
-        if (item.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
+        when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+
+            R.id.fake_competition -> {
+                fakeCompetition()
+                true
+            }
+
+            R.id.fake_egg -> {
+                fakeEgg()
+                true
+            }
+
+            R.id.fake_hunter_1 -> {
+                fakeHunter("1")
+                true
+            }
+
+            R.id.fake_hunter_2 -> {
+                fakeHunter("2")
+                true
+            }
+
+            R.id.test_hunter_3 -> {
+                fakeHunter("3")
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
+
+    private fun fakeCompetition() {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun fakeEgg() {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"ed\":\"Fake Egg\"," +
+                    "\"et\":\"EEEEEE\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun fakeHunter(suffix: String) {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"hd\":\"Fake Hunter $suffix\"," +
+                    "\"ht\":\"HHHHH$suffix\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
 
     override fun onResume() {
         super.onResume()
