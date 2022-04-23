@@ -41,10 +41,8 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         // Remember the hunter.
 
-        with(intent.extras!!) {
-            hunterDescription = getString(Extras.HUNTER_DESCRIPTION)!!
-            hunterTag = getString(Extras.HUNTER_TAG)!!
-        }
+        hunterDescription = intent.getStringExtra(Extras.HUNTER_DESCRIPTION)!!
+        hunterTag = intent.getStringExtra(Extras.HUNTER_TAG)!!
 
         CompetitionManager.enterAsHunter(
             this,
