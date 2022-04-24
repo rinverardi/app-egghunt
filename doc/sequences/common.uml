@@ -1,0 +1,32 @@
+!$AREA_DARK = "#999"
+!$AREA_LIGHT = "#eee"
+!$BLACK = "#000"
+!$PRIMARY_DARK = "#08b"
+!$PRIMARY_LIGHT = "#3be"
+!$WHITE = "#fff"
+
+hide footbox
+scale 2
+
+skinparam actor {
+  BackgroundColor $PRIMARY_LIGHT
+  BorderColor $PRIMARY_DARK
+}
+
+skinparam arrow {
+  Thickness 2
+  Color $PRIMARY_DARK
+}
+
+skinparam participant {
+  BackgroundColor $WHITE
+  BorderColor $PRIMARY_DARK
+}
+
+skinparam sequenceBox {
+  BackgroundColor $AREA_LIGHT
+  BorderColor $AREA_DARK
+}
+
+skinparam actorStyle hollow
+skinparam roundcorner 10
