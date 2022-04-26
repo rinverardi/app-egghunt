@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+    <string name="action_switch">Switch hunter</string>
     <string name="activity_hunter">Hunter</string>
     <string name="activity_map">Map</string>
     <string name="activity_organizer">Organizer</string>
