@@ -1,0 +1,24 @@
+@startuml
+!include common.uml
+
+actor "Jäger" as hunter
+participant "mobiles Gerät" as mobileDevice
+
+box "Egg-Hunt-App"
+  participant "HunterActivity" as hunterActivity
+  participant "ScanActivity" as scanActivity
+  participant "EggManager" as eggManager
+  participant "EggoRepo" as eggRepo
+end box
+
+participant "Egg-Hunt-Cloud" as cloud
+
+hunter -> hunterActivity: find egg
+hunterActivity -> scanActivity: scanEgg()
+scanActivity -> eggManager: send(eggData)
+eggManager-> cloud: markAsFound(egg)
+cloud -> eggRepo: updateEggDatabase()
+cloud -> mobileDevice: show(notification)
+mobileDevice -> hunter: show(notification) [System]
+
+@enduml
