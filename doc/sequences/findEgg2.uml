@@ -23,6 +23,9 @@ scanActivity -> hunterActivity: send(eggCode)
 hunterActivity -> eggManager: find(egg)
 eggManager-> cloud: markAsFound(egg)
 cloud -> eggRepo: syncAutomatically()
+cloud -> scoreService: syncAutomatically()
+scoreService -> competitionActivity: broadcast(score)
+competitionActivity -> scoreAdapter: update(score)
 
 alt App im Hintergrund
   cloud -> mobileDevice: show(notification)
@@ -31,11 +34,6 @@ else App im Vordergrund
   cloud -> messagingService: deliver(notification)
   messagingService -> competitionActivity: show(notification)
   competitionActivity -> hunter: show(notification) [App]
-  competitionActivity -> scoreService: updateScore(eggList)
-  scoreService -> cloud: updateScore(score)
-  cloud -> messagingService: deliver(notification)
-  messagingService -> competitionActivity: updateScore(score)
-  competitionActivity -> scoreAdapter: updateScore(score)
 end
 
 @enduml
