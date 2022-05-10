@@ -8,7 +8,9 @@ box "Egg-Hunt-App"
   participant "HunterActivity" as hunterActivity
   participant "ScanActivity" as scanActivity
   participant "EggManager" as eggManager
-  participant "EggRepo" as eggRepo  
+  participant "EggRepo" as eggRepo 
+  participant "ScoreAdapter" as scoreAdapter 
+  participant "ScoreService" as scoreService
   participant "CompetitionActivity" as competitionActivity
   participant "MessagingService" as messagingService
 end box
@@ -29,6 +31,11 @@ else App im Vordergrund
   cloud -> messagingService: deliver(notification)
   messagingService -> competitionActivity: show(notification)
   competitionActivity -> hunter: show(notification) [App]
+  competitionActivity -> scoreService: updateScore(eggList)
+  scoreService -> cloud: updateScore(score)
+  cloud -> messagingService: deliver(notification)
+  messagingService -> competitionActivity: updateScore(score)
+  competitionActivity -> scoreAdapter: updateScore(score)
 end
 
 @enduml

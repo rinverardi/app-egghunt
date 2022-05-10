@@ -7,15 +7,16 @@ box "Egg-Hunt-App"
   participant "OrganizerActivity" as organizerActivity
   participant "ScanActivity" as scanActivity
   participant "EggManager" as eggManager
-  participant "EggoRepo" as eggRepo
+  participant "EggRepo" as eggRepo
 end box
 
 participant "Egg-Hunt-Cloud" as cloud
 
 organizer -> organizerActivity: hide egg
 organizerActivity -> scanActivity: scanEgg()
-scanActivity -> eggManager: send(eggData)
+scanActivity -> organizerActivity: send(eggCode)
+organizerActivity -> eggManager: hide(egg)
 eggManager-> cloud: addToDatabase(egg)
-cloud -> eggRepo: updateEggDatabase()
+cloud -> eggRepo: syncAutomatically()
 
 @enduml
