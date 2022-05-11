@@ -9,7 +9,7 @@ box "Egg-Hunt-App"
   participant "ScanActivity" as scanActivity
   participant "EggManager" as eggManager
   participant "EggRepo" as eggRepo 
-  participant "ScoreAdapter" as scoreAdapter 
+  participant "ScoreViewHolder" as scoreViewHolder
   participant "ScoreService" as scoreService
   participant "CompetitionActivity" as competitionActivity
   participant "MessagingService" as messagingService
@@ -25,7 +25,7 @@ eggManager-> cloud: markAsFound(egg)
 cloud -> eggRepo: syncAutomatically()
 cloud -> scoreService: syncAutomatically()
 scoreService -> competitionActivity: broadcast(score)
-competitionActivity -> scoreAdapter: update(score)
+competitionActivity -> scoreViewHolder: update(score)
 
 alt App im Hintergrund
   cloud -> mobileDevice: show(notification)
