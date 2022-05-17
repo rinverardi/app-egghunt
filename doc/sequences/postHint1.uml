@@ -1,5 +1,5 @@
 @startuml
-!include common.uml
+!include ../common.uml
 
 actor "Organisator" as organizer
 actor "Jäger" as hunter

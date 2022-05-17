@@ -1,5 +1,5 @@
 @startuml
-!include common.uml
+!include ../common.uml
 
 actor "Jäger" as hunter
 participant "mobiles Gerät" as mobileDevice
