@@ -1,0 +1,46 @@
+@startuml
+!include common.uml
+
+cloud "Firebase" {
+  component "Cloud Functions" as cloudFunctions
+  component "Realtime Database" as cloudDatabase
+  component "Push Messaging" as cloudMessaging
+}
+
+cloudDatabase -> cloudFunctions: trigger
+cloudFunctions -> cloudMessaging: send
+
+node "Organisator" <<mobiles Gerät>> {
+  component "Egg Hunt" as organizerApp <<mobile App>>
+}
+
+cloudDatabase <---> organizerApp: sync
+cloudMessaging ---> organizerApp: push
+
+node "Jäger" <<mobiles Gerät>> {
+  component "Egg Hunt" as hunterApp <<mobile App>>
+}
+
+cloudDatabase <---> hunterApp: sync
+cloudMessaging ---> hunterApp: push
+
+rectangle "<img:qrCode.png>" as qrCode {
+}
+
+hunterApp <-- qrCode: scan
+organizerApp <-- qrCode: scan
+
+cloud "Netlify" as netlify {
+  component "Web-Applikation" as webApp
+}
+
+qrCode <-- netlify: generate
+
+cloud "Google" as google {
+  component "Google Maps" as googleMaps
+}
+
+organizerApp <-- googleMaps: display
+hunterApp <-- googleMaps: display
+
+@enduml

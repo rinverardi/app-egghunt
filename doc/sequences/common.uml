@@ -23,6 +23,10 @@ skinparam participant {
   BorderColor $PRIMARY_DARK
 }
 
+skinparam rectangle {
+  BackgroundColor $WHITE
+}
+
 skinparam sequenceBox {
   BackgroundColor $AREA_LIGHT
   BorderColor $AREA_DARK
