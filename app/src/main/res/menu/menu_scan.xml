@@ -7,31 +7,31 @@
 
     <item
         android:id="@+id/fake_competition"
-        android:title="Test Competition"
+        android:title="Fake Competition"
         app:showAsAction="never"
         tools:ignore="HardcodedText"/>
 
     <item
         android:id="@+id/fake_egg"
-        android:title="Test Egg"
+        android:title="Fake Egg"
         app:showAsAction="never"
         tools:ignore="HardcodedText"/>
 
     <item
         android:id="@+id/fake_hunter_1"
-        android:title="Test Hunter 1"
+        android:title="Fake Hunter 1"
         app:showAsAction="never"
         tools:ignore="HardcodedText"/>
 
     <item
         android:id="@+id/fake_hunter_2"
-        android:title="Test Hunter 2"
+        android:title="Fake Hunter 2"
         app:showAsAction="never"
         tools:ignore="HardcodedText"/>
 
     <item
         android:id="@+id/test_hunter_3"
-        android:title="Test Hunter 3"
+        android:title="Fake Hunter 3"
         app:showAsAction="never"
         tools:ignore="HardcodedText"/>
 </menu>
