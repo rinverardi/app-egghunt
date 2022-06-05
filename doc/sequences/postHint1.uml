@@ -1,0 +1,35 @@
+@startuml
+!include ../common.uml
+
+actor "Organisator" as organizer
+actor "Jäger" as hunter
+participant "mobiles Gerät" as mobileDevice
+
+box "Egg-Hunt-App"
+  participant "CompetitionActivity" as competitionActivity
+  participant "HintManager" as hintManager
+  participant "MessagingService" as messagingService
+end box
+
+box "Egg-Hunt-Cloud"
+  participant "Cloud Functions" as cloudFunctions
+  participant "Cloud Messaging" as cloudMessaging
+  participant "Realtime Database" as realtimeDatabase
+end box
+
+organizer -> competitionActivity: post hint
+competitionActivity -> hintManager: postHint()
+hintManager -> realtimeDatabase: insertHint()
+realtimeDatabase -> cloudFunctions: onCreate(hint)
+cloudFunctions -> cloudMessaging: sendNotification
+
+alt App im Hintergrund
+  cloudMessaging -> mobileDevice: show(notification)
+  mobileDevice -> hunter: show(notification) [System]
+else App im Vordergrund
+  cloudMessaging -> messagingService: deliver(notification)
+  messagingService -> competitionActivity: show(notification)
+  competitionActivity -> hunter: show(notification) [App]
+end
+
+@enduml

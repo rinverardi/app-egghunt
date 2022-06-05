@@ -1,0 +1,22 @@
+@startuml
+!include ../common.uml
+
+actor "Organisator" as organizer
+
+box "Egg-Hunt-App"
+  participant "OrganizerActivity" as organizerActivity
+  participant "ScanActivity" as scanActivity
+  participant "EggManager" as eggManager
+  participant "EggRepo" as eggRepo
+end box
+
+participant "Egg-Hunt-Cloud" as cloud
+
+organizer -> organizerActivity: hide egg
+organizerActivity -> scanActivity: scanEgg()
+scanActivity -> organizerActivity: send(eggCode)
+organizerActivity -> eggManager: hide(egg)
+eggManager-> cloud: addToDatabase(egg)
+cloud -> eggRepo: syncAutomatically()
+
+@enduml
