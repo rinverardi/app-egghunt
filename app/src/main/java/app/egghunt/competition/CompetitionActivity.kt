@@ -14,6 +14,7 @@ import app.egghunt.lib.Actions
 import app.egghunt.lib.Code
 import app.egghunt.lib.CodeParser
 import app.egghunt.lib.Extras
+import app.egghunt.lib.Keys
 import app.egghunt.lib.Messaging
 import app.egghunt.lib.PopupDialog
 import app.egghunt.lib.PopupNotification
@@ -172,5 +173,11 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
         )
 
         dialog.show(supportFragmentManager, null)
+    }
+
+    fun reset() {
+        arrayOf(Keys.DEVICE, Keys.EGG, Keys.HINT, Keys.HUNTER).forEach {
+            competition.child(it).removeValue()
+        }
     }
 }
