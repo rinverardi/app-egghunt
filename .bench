@@ -1,5 +1,5 @@
 setEnvironmentVariable ANDROID_HOME ~/opt/android-sdk
-setEnvironmentVariable GRADLE_HOME ~/opt/gradle
+setEnvironmentVariable GRADLE_HOME ~/opt/gradle-7.3
 setEnvironmentVariable GRADLE_OPTS -Dorg.gradle.daemon=true
 setEnvironmentVariable JAVA_HOME ~/opt/jdk-17
 setEnvironmentVariable QEMU_AUDIO_DRV none
