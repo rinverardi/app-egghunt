@@ -47,6 +47,7 @@
         </activity>
 
         <service android:exported="false" android:name=".device.DeviceService"/>
+        <service android:exported="false" android:name=".hunter.HunterService"/>
         <service android:exported="false" android:name=".score.ScoreService"/>
 
         <!-- Firebase Messaging -->

@@ -18,8 +18,8 @@ class DeviceService : Service() {
             intent.getStringExtra(Extras.COMPETITION_TAG)!!
         )
 
-        if (token != null) {
-            DeviceRepo.insert(competition!!, token!!)
+        token?.let { token ->
+            DeviceRepo.insert(competition!!, token)
         }
     }
 
@@ -29,8 +29,8 @@ class DeviceService : Service() {
             intent.getStringExtra(Extras.COMPETITION_TAG)!!
         )
 
-        if (token != null) {
-            DeviceRepo.remove(competition!!, token!!)
+        token?.let { token ->
+            DeviceRepo.remove(competition!!, token)
         }
 
         competition = null

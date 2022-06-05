@@ -97,10 +97,8 @@ abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity(
 
         // Attach the database.
 
-        val extras = intent.extras!!
-
-        competitionDescription = extras.getString(Extras.COMPETITION_DESCRIPTION)!!
-        competitionTag = extras.getString(Extras.COMPETITION_TAG)!!
+        competitionDescription = intent.getStringExtra(Extras.COMPETITION_DESCRIPTION)!!
+        competitionTag = intent.getStringExtra(Extras.COMPETITION_TAG)!!
 
         competition = CompetitionRepo.sync(competitionDescription, competitionTag)
 

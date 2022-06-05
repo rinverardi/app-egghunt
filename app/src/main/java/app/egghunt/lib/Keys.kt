@@ -8,6 +8,7 @@ object Keys {
     const val DEVICE = "device"
     const val EGG = "egg"
     const val HINT = "hint"
+    const val HUNTER = "hunter"
     const val HUNTER_DESCRIPTION = "hunterDescription"
     const val HUNTER_TAG = "hunterTag"
     const val ORDER = "order"

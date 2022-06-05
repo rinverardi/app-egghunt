@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
+import app.egghunt.action.switch.SwitchDialog
 import app.egghunt.competition.CompetitionActivity
 import app.egghunt.competition.CompetitionManager
 import app.egghunt.egg.EggAdapter
@@ -17,6 +18,7 @@ import app.egghunt.egg.EggManager
 import app.egghunt.egg.EggRepo
 import app.egghunt.hint.HintAdapter
 import app.egghunt.hint.HintRepo
+import app.egghunt.lib.Actions
 import app.egghunt.lib.Code
 import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
@@ -41,10 +43,8 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
 
         // Remember the hunter.
 
-        with(intent.extras!!) {
-            hunterDescription = getString(Extras.HUNTER_DESCRIPTION)!!
-            hunterTag = getString(Extras.HUNTER_TAG)!!
-        }
+        hunterDescription = intent.getStringExtra(Extras.HUNTER_DESCRIPTION)!!
+        hunterTag = intent.getStringExtra(Extras.HUNTER_TAG)!!
 
         CompetitionManager.enterAsHunter(
             this,
@@ -71,6 +71,15 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         // Initialize the toolbar.
 
         findViewById<Toolbar>(R.id.toolbar)!!.title = hunterDescription
+
+        findViewById<Toolbar>(R.id.toolbar)!!.setOnMenuItemClickListener {
+            if (it.itemId == R.id.action_switch) {
+                switch()
+                true
+            } else {
+                false
+            }
+        }
     }
 
     override fun onScanEgg(code: Code): Boolean {
@@ -141,5 +150,23 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         tab.findViewById<View>(R.id.button_hide)?.visibility = View.GONE
         tab.findViewById<View>(R.id.button_post)?.visibility = View.GONE
         tab.findViewById<View>(R.id.edit_post)?.visibility = View.GONE
+    }
+
+    private fun switch() {
+        supportFragmentManager.setFragmentResultListener(Actions.SWITCH, this) { _, result ->
+            hunterDescription = result.getString(Extras.HUNTER_DESCRIPTION)!!
+            hunterTag = result.getString(Extras.HUNTER_TAG)!!
+
+            findViewById<Toolbar>(R.id.toolbar)!!.title = hunterDescription
+        }
+
+        HunterRepo.list(competition, {}, { hunters ->
+            val dialog = SwitchDialog(
+                hunters.map { it.description }.toTypedArray(),
+                hunters.map { it.tag }.toTypedArray()
+            )
+
+            dialog.show(supportFragmentManager, null)
+        })
     }
 }

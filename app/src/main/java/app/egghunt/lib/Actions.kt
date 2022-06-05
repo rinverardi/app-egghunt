@@ -7,4 +7,5 @@ object Actions {
     const val NEW_MESSAGE = "eggHunt/newMessage"
     const val NEW_SCORES = "eggHunt/newScores"
     const val NEW_TOKEN = "eggHunt/newToken"
+    const val SWITCH = "eggHunt/switch"
 }
