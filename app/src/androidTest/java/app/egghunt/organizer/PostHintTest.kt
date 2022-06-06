@@ -7,11 +7,14 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.replaceText
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
+import app.egghunt.Actions.waitForDb
+import app.egghunt.Actions.waitForUi
 import app.egghunt.R
 import app.egghunt.lib.Extras
 import org.hamcrest.Matchers.allOf
@@ -44,6 +47,8 @@ class PostHintTest {
 
         tab.perform(click())
 
+        onView(isRoot()).perform(waitForUi())
+
         val edit = onView(allOf(withId(R.id.edit_post)))
 
         edit.perform(replaceText("Fake Hint"))
@@ -51,6 +56,8 @@ class PostHintTest {
         val button = onView(allOf(withId(R.id.button_post)))
 
         button.perform(click())
+
+        onView(isRoot()).perform(waitForDb())
 
         val hintText = onView(allOf(withId(R.id.text)))
 

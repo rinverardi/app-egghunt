@@ -8,6 +8,7 @@ import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.intent.Intents
 import androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent
+import androidx.test.espresso.matcher.ViewMatchers.isRoot
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -15,6 +16,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.GrantPermissionRule
+import app.egghunt.Actions.waitForDb
 import app.egghunt.R
 import app.egghunt.action.scan.ScanActivity
 import app.egghunt.lib.Extras
@@ -62,6 +64,8 @@ class FindEggTest {
         val item = onView(allOf(withText("Fake Egg")))
 
         item.perform(click())
+
+        onView(isRoot()).perform(waitForDb())
 
         val eggDescription = onView(allOf(withId(R.id.description)))
 
