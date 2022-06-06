@@ -1,0 +1,30 @@
+[
+  {
+    "position": 1,
+    "scores": [
+      {
+        "count": 2,
+        "hunterDescription": "Fake Hunter 1",
+        "hunterTag": "H00001",
+        "medal": "gold"
+      }
+    ]
+  },
+  {
+    "position": 2,
+    "scores": [
+      {
+        "count": 1,
+        "hunterDescription": "Fake Hunter 2",
+        "hunterTag": "H00002",
+        "medal": "silver"
+      },
+      {
+        "count": 1,
+        "hunterDescription": "Fake Hunter 3",
+        "hunterTag": "H00003",
+        "medal": "silver"
+      }
+    ]
+  }
+]

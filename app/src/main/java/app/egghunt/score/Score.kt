@@ -6,5 +6,6 @@ data class Score(
     val hunterTag: String,
     var medal: String = ""
 ) {
+    @Transient
     val order = -count
 }
