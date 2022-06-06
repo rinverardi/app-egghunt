@@ -15,13 +15,13 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "app.egghunt"
+        applicationId 'app.egghunt'
         minSdk 21
         targetSdk 31
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildFeatures {
