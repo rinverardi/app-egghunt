@@ -3,8 +3,8 @@ package app.egghunt.score
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import app.egghunt.R
 import app.egghunt.competition.CompetitionRepo
+import app.egghunt.egg.Egg
 import app.egghunt.lib.Actions
 import app.egghunt.lib.Extras
 import app.egghunt.lib.Keys
@@ -16,43 +16,6 @@ import com.google.gson.Gson
 
 class ScoreService : Service() {
     private var competition: DatabaseReference? = null
-
-    private fun assignMedals(ranks: List<Rank>) {
-        for (position in 1..3) {
-            ranks.filter { it.position == position }.forEach { rank ->
-                rank.scores.forEach { score ->
-                    score.medal = resources.getStringArray(R.array.medals)[position - 1]
-                }
-            }
-        }
-    }
-
-    private fun assignPositions(ranks: List<Rank>) {
-        var position = 1
-
-        ranks.forEach {
-            it.position = position
-
-            position += it.scores.size
-        }
-    }
-
-    private fun buildRanks(scores: List<Score>): List<Rank> = scores
-        .sortedWith(compareBy(Score::order, Score::hunterDescription))
-        .groupBy(Score::count)
-        .map { Rank(0, it.value) }
-
-    private fun buildScores(snapshot: DataSnapshot): List<Score> =
-        snapshot.child(Keys.EGG).children
-            .filter { it.child(Keys.HUNTER_TAG).exists() }
-            .groupBy { it.child(Keys.HUNTER_TAG).value }
-            .map {
-                Score(
-                    it.value.size,
-                    it.value.first().child(Keys.HUNTER_DESCRIPTION).value as String,
-                    it.value.first().child(Keys.HUNTER_TAG).value as String
-                )
-            }
 
     private fun enterCompetition(intent: Intent) {
         competition = CompetitionRepo.sync(
@@ -76,11 +39,11 @@ class ScoreService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     private fun onChange(snapshot: DataSnapshot) {
-        val scores = buildScores(snapshot)
-        val ranks = buildRanks(scores)
+        val eggs = snapshot.child(Keys.EGG).children
+            .map { it.getValue(Egg::class.java)!! }
+            .toList()
 
-        assignPositions(ranks)
-        assignMedals(ranks)
+        val ranks = ScoreBuilder.build(applicationContext, eggs)
 
         val intent = Intent().apply {
             action = Actions.NEW_SCORES
