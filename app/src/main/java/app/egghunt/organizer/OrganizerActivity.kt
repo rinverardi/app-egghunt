@@ -115,28 +115,6 @@ class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
         return result
     }
 
-    // @remo Fix me!
-
-    /*
-    override fun onStart() {
-        super.onStart()
-
-        eggAdapter?.startListening()
-        hintAdapter?.startListening()
-    }
-    */
-
-    // @remo Fix me!
-
-    /*
-    override fun onStop() {
-        eggAdapter?.stopListening()
-        hintAdapter?.stopListening()
-
-        super.onStop()
-    }
-    */
-
     fun rebind(tab: View) {
 
         // Bind the eggs.

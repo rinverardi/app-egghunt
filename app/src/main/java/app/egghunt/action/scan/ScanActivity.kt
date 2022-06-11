@@ -19,6 +19,43 @@ import com.google.zxing.BarcodeFormat
 class ScanActivity : AppCompatActivity() {
     private lateinit var scanner: CodeScanner
 
+    private fun fakeCompetition() {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun fakeEgg() {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"ed\":\"Fake Egg\"," +
+                    "\"et\":\"EEEEEE\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
+    private fun fakeHunter(suffix: String) {
+        intent.putExtra(
+            Intent.EXTRA_TEXT, "{" +
+                    "\"cd\":\"Fake Competition\"," +
+                    "\"ct\":\"CCCCCC\"," +
+                    "\"hd\":\"Fake Hunter $suffix\"," +
+                    "\"ht\":\"HHHHH$suffix\"}"
+        )
+
+        setResult(Activity.RESULT_OK, intent)
+        finish()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -98,52 +135,15 @@ class ScanActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
 
-    private fun fakeCompetition() {
-        intent.putExtra(
-            Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"Fake Competition\"," +
-                    "\"ct\":\"CCCCCC\"}"
-        )
+    override fun onPause() {
+        scanner.releaseResources()
 
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-    }
-
-    private fun fakeEgg() {
-        intent.putExtra(
-            Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"Fake Competition\"," +
-                    "\"ct\":\"CCCCCC\"," +
-                    "\"ed\":\"Fake Egg\"," +
-                    "\"et\":\"EEEEEE\"}"
-        )
-
-        setResult(Activity.RESULT_OK, intent)
-        finish()
-    }
-
-    private fun fakeHunter(suffix: String) {
-        intent.putExtra(
-            Intent.EXTRA_TEXT, "{" +
-                    "\"cd\":\"Fake Competition\"," +
-                    "\"ct\":\"CCCCCC\"," +
-                    "\"hd\":\"Fake Hunter $suffix\"," +
-                    "\"ht\":\"HHHHH$suffix\"}"
-        )
-
-        setResult(Activity.RESULT_OK, intent)
-        finish()
+        super.onPause()
     }
 
     override fun onResume() {
         super.onResume()
 
         scanner.startPreview()
-    }
-
-    override fun onPause() {
-        scanner.releaseResources()
-
-        super.onPause()
     }
 }

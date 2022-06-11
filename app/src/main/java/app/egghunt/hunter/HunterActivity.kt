@@ -92,26 +92,6 @@ class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
         return result
     }
 
-    // @remo Fix me!
-
-    /*
-    override fun onStart() {
-        super.onStart()
-
-        eggAdapter?.startListening()
-    }
-    */
-
-    // @remo Fix me!
-
-    /*
-    override fun onStop() {
-        eggAdapter?.stopListening()
-
-        super.onStop()
-    }
-    */
-
     fun rebind(tab: View) {
 
         // Bind the eggs.

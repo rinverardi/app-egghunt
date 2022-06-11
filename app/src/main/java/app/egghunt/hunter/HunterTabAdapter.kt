@@ -9,15 +9,6 @@ import app.egghunt.R
 internal class HunterTabAdapter(private val activity: HunterActivity) :
     RecyclerView.Adapter<HunterTabViewHolder>() {
 
-    override fun getItemCount(): Int = 3
-
-    override fun getItemViewType(position: Int): Int = when (position) {
-        0 -> R.layout.tab_eggs
-        1 -> R.layout.tab_scores
-        2 -> R.layout.tab_hints
-        else -> throw NotImplementedError()
-    }
-
     override fun onBindViewHolder(viewHolder: HunterTabViewHolder, position: Int) {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HunterTabViewHolder {
@@ -27,5 +18,14 @@ internal class HunterTabAdapter(private val activity: HunterActivity) :
         activity.reinitialize(tab)
 
         return HunterTabViewHolder(tab)
+    }
+
+    override fun getItemCount(): Int = 3
+
+    override fun getItemViewType(position: Int): Int = when (position) {
+        0 -> R.layout.tab_eggs
+        1 -> R.layout.tab_scores
+        2 -> R.layout.tab_hints
+        else -> throw NotImplementedError()
     }
 }
