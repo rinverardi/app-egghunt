@@ -41,6 +41,5 @@ cloud "Google" as google {
 }
 
 organizerApp <-- googleMaps: display
-hunterApp <-- googleMaps: display
 
 @enduml
