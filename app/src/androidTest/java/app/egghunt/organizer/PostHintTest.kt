@@ -24,6 +24,20 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An integration test for the 'post hint' workflow.
+ *
+ * Preconditions: Logged in to the 'fake competition' as the organizer.
+ *
+ * _Organizer Activity_
+ *
+ * (1) Reset the remote data.
+ * (2) Switch to the 'hints' tab.
+ * (3) Enter the 'fake hint'.
+ * (4) Click the 'post' button.
+ * (5) Assert that the hint is listed.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class PostHintTest {

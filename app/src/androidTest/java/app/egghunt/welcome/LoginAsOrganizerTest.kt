@@ -27,6 +27,27 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An integration test for the 'login as organizer' workflow.
+ *
+ * Preconditions: Logged out.
+ *
+ * _Welcome Activity_
+ *
+ * (1) Click the 'scan' button.
+ *
+ * _Scan Activity_
+ *
+ * (2) Open the options menu.
+ * (3) Scan the QR code for the 'fake competition'.
+ *
+ * _Organizer Activity_
+ *
+ * (4) Check the activity title.
+ * (5) Click the 'up navigation' button.
+ * (6) Click the 'logout' button.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class LoginAsOrganizerTest {

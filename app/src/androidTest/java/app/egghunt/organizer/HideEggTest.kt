@@ -27,6 +27,30 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An integration test for the 'hide egg' workflow.
+ *
+ * Preconditions: Logged in to the 'fake competition' as the organizer.
+ *
+ * _Organizer Activity_
+ *
+ * (1) Reset the remote data.
+ * (2) Click the 'hide' button.
+ *
+ * _Scan Activity_
+ *
+ * (3) Open the options menu.
+ * (4) Scan the QR code for the 'fake egg'.
+ *
+ * _Position Activity_
+ *
+ * (5) Click the 'accept' button.
+ *
+ * _Organizer Activity_
+ *
+ * (6) Assert that the 'fake egg' is listed as hidden.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class HideEggTest {

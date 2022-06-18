@@ -13,6 +13,13 @@ import org.hamcrest.Matchers.anyOf
 import org.hamcrest.Matchers.instanceOf
 
 object Matchers {
+
+    /**
+     * Match the activity title.
+     *
+     * Works for both action bars and toolbars.
+     */
+
     fun activityTitle(): Matcher<View> = anyOf(
         allOf(
             instanceOf(TextView::class.java),
@@ -25,6 +32,10 @@ object Matchers {
             withParent(withId(R.id.toolbar))
         )
     )
+
+    /**
+     * Match the 'up navigation' title.
+     */
 
     fun upButton(): Matcher<View> = allOf(
         instanceOf(ImageButton::class.java),

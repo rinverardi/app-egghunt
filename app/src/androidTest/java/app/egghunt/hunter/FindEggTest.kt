@@ -27,6 +27,26 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+/**
+ * An integration test for the 'find egg' workflow.
+ *
+ * Preconditions: Logged in to the 'fake competition'  as the 'fake hunter'.
+ *
+ * _Hunter Activity_
+ *
+ * (1) Reset the remote data.
+ * (2) Click the 'find' button.
+ *
+ * _Scan Activity_
+ *
+ * (3) Open the options menu.
+ * (4) Scan the QR code for the 'fake egg'.
+ *
+ * _Hunter Activity_
+ *
+ * (5) Assert that the 'fake egg' is listed as found.
+ */
+
 @LargeTest
 @RunWith(AndroidJUnit4::class)
 class FindEggTest {
