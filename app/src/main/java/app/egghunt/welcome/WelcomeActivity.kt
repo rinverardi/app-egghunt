@@ -27,6 +27,10 @@ import app.egghunt.lib.PopupDialog
 import app.egghunt.organizer.OrganizerActivity
 import kotlin.math.roundToLong
 
+/**
+ * The main activity that allows users to log in to a competition.
+ */
+
 class WelcomeActivity : AppCompatActivity() {
     private val scanLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->

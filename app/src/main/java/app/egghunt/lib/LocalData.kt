@@ -4,6 +4,12 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
+/**
+ * Local data is stored on the device.
+ *
+ * Uses shared preferences as the persistence mechanism.
+ */
+
 object LocalData {
     fun clear(context: Context) = open(context).edit {
         clear()

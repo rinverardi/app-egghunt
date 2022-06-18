@@ -8,6 +8,22 @@ import app.egghunt.lib.Actions
 import app.egghunt.lib.Extras
 import com.google.firebase.database.DatabaseReference
 
+/**
+ * A background service for device management.
+ *
+ * _Key Responsibilities_
+ *
+ * * Automatically add devices to competitions.
+ * * Automatically remove devices from competitions.
+ * * Keep messaging registration tokens updated.
+ *
+ * _Actions_
+ *
+ * * Action.ENTER_COMPETITION -- when entering a competition
+ * * Actions.LEAVE_COMPETITION -- when leaving a competition
+ * * Actions.NEW_TOKEN -- when a messaging registration token changes
+ */
+
 class DeviceService : Service() {
     private var competition: DatabaseReference? = null
     private var token: String? = null

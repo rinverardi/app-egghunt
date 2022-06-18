@@ -24,6 +24,17 @@ import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
+/**
+ * An activity for participating in a competition as a hunter.
+ *
+ * _Start Parameters_
+ *
+ * * Extras.COMPETITION_DESCRIPTION (required) -- the competition description
+ * * Extras.COMPETITION_TAG (required) -- the competition tag
+ * * Extras.HUNTER_DESCRIPTION (required) -- the hunter description
+ * * Extras.HUNTER_TAG (required) -- the hunter tag
+ */
+
 class HunterActivity : CompetitionActivity(R.layout.activity_hunter) {
     private var eggAdapter: EggAdapter? = null
     private var hintAdapter: HintAdapter? = null

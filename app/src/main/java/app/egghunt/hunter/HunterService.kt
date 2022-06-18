@@ -8,6 +8,19 @@ import app.egghunt.lib.Actions
 import app.egghunt.lib.Extras
 import com.google.firebase.database.DatabaseReference
 
+/**
+ * A background service for hunter management.
+ *
+ * _Key Responsibilities_
+ *
+ * * Automatically add hunters to competitions.
+ *
+ * _Actions_
+ *
+ * * Action.ENTER_COMPETITION -- when entering a competition
+ * * Actions.LEAVE_COMPETITION -- when leaving a competition
+ */
+
 class HunterService : Service() {
     private var competition: DatabaseReference? = null
 

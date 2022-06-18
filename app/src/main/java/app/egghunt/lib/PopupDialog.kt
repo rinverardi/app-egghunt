@@ -6,6 +6,21 @@ import android.os.Bundle
 import androidx.fragment.app.DialogFragment
 import app.egghunt.R
 
+/**
+ * A popup dialog.
+ *
+ * _Key Responsibilities_
+ *
+ * * Ask a user for confirmation; e.g. Actions.LOGOUT.
+ * * Present feedback to a user.
+ *
+ * _Start Parameters_
+ *
+ * * Arguments.ACTION (optional) -- the action that caused the popup dialog
+ * * Arguments.BODY (required) -- the text for the dialog body
+ * * Arguments.TITLE (required) -- the text for the dialog title
+ */
+
 class PopupDialog(action: String?, body: Int, title: Int) : DialogFragment() {
     init {
         val arguments = Bundle()

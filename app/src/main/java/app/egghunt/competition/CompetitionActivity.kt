@@ -24,6 +24,15 @@ import app.egghunt.welcome.WelcomeActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.gson.Gson
 
+/**
+ * An abstract activity for participating in a competition.
+ *
+ * _Start Parameters_
+ *
+ * * Extras.COMPETITION_DESCRIPTION (required) -- the competition description
+ * * Extras.COMPETITION_TAG (required) -- the competition tag
+ */
+
 abstract class CompetitionActivity(private val layout: Int) : AppCompatActivity() {
     private val broadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {

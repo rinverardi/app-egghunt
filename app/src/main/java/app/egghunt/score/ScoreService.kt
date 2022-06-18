@@ -14,6 +14,24 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.ValueEventListener
 import com.google.gson.Gson
 
+/**
+ * A background service for score management.
+ *
+ * _Key Responsibilities_
+ *
+ * * Fire a broadcast after the scores are rebuilt.
+ * * Rebuild the scores when the remote data changes.
+ *
+ * _Actions_
+ *
+ * * Action.ENTER_COMPETITION -- when entering a competition
+ * * Actions.LEAVE_COMPETITION -- when leaving a competition
+ *
+ * _Broadcasts_
+ *
+ * * Actions.NEW_SCORES -- after the scores are rebuilt
+ */
+
 class ScoreService : Service() {
     private var competition: DatabaseReference? = null
 

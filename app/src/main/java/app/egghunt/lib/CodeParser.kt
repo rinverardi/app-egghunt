@@ -4,6 +4,16 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonSyntaxException
 
+/**
+ * A parser for QR codes.
+ *
+ * _Key Responsibilities_
+ *
+ * * Parse competition codes.
+ * * Parse egg codes.
+ * * Parse hunter codes.
+ */
+
 object CodeParser {
     private fun allowDescription(value: String?): Boolean =
         value == null || value.length <= 30

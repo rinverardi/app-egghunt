@@ -9,6 +9,20 @@ import app.egghunt.lib.Actions
 import app.egghunt.lib.Arguments
 import app.egghunt.lib.Extras
 
+/**
+ * A dialog to switch the current hunter.
+ *
+ * _Start Parameters_
+ *
+ * * Arguments.HUNTER_DESCRIPTIONS -- the list of hunter descriptions
+ * * Arguments.HUNTER_TAGS -- the list of hunter tags
+ *
+ * _Result Data_
+ *
+ * * Extras.HUNTER_DESCRIPTION -- the hunter description
+ * * Extras.HUNTER_TAG -- the hunter tag
+ */
+
 class SwitchDialog(hunterDescriptions: Array<String>, hunterTags: Array<String>) :
     DialogFragment() {
 

@@ -5,6 +5,19 @@ import app.egghunt.device.DeviceService
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
+/**
+ * A background service for push messaging.
+ *
+ * _Key Responsibilities_
+ *
+ * * Fire a broadcasts after a push message is received.
+ * * Keep messaging registration tokens updated.
+ *
+ * _Broadcasts_
+ *
+ * * Actions.NEW_MESSAGE -- when a new push message is received
+ */
+
 class MessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         val intent = Intent().apply {

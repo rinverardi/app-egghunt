@@ -30,6 +30,24 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+/**
+ * An activity to set the position of a hidden egg.
+ *
+ * _Start Parameters_
+ *
+ * * Extras.EGG_DESCRIPTION (required) -- the egg description
+ * * Extras.EGG_TAG (required) -- the egg tag
+ * * Extras.POSITION_LATITUDE (optional) -- the current egg position (latitude)
+ * * Extras.POSITION_LONGITUDE (optional) -- the current egg position (longitude)
+ *
+ * _Result Data_
+ *
+ * * Extras.EGG_DESCRIPTION -- the egg description (pass-through)
+ * * Extras.EGG_TAG -- the egg tag (pass-through)
+ * * Extras.POSITION_LATITUDE -- the new egg position (latitude)
+ * * Extras.POSITION_LONGITUDE -- the new egg position (longitude)
+ */
+
 class PositionActivity : AppCompatActivity(), LocationListener, OnMapReadyCallback {
     private lateinit var buttonAccept: FloatingActionButton
     private lateinit var buttonLock: FloatingActionButton

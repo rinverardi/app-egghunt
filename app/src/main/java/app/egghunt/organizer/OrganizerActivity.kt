@@ -28,6 +28,15 @@ import app.egghunt.lib.Extras
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
+/**
+ * An activity for participating in a competition as the organizer.
+ *
+ * _Start Parameters_
+ *
+ * * Extras.COMPETITION_DESCRIPTION (required) -- the competition description
+ * * Extras.COMPETITION_TAG (required) -- the competition tag
+ */
+
 class OrganizerActivity : CompetitionActivity(R.layout.activity_organizer) {
     private var eggAdapter: EggAdapter? = null
 

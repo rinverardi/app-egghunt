@@ -16,6 +16,18 @@ import com.budiyev.android.codescanner.ErrorCallback
 import com.budiyev.android.codescanner.ScanMode
 import com.google.zxing.BarcodeFormat
 
+/**
+ * An activity to scan a QR code.
+ *
+ * _Start Parameters_
+ *
+ * * Extras.TITLE (required) -- the activity title
+ *
+ * _Result Data_
+ *
+ * * Intent.EXTRA_TEXT -- the value of the QR code
+ */
+
 class ScanActivity : AppCompatActivity() {
     private lateinit var scanner: CodeScanner
 

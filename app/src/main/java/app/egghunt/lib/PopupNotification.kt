@@ -13,6 +13,14 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import app.egghunt.R
 
+/**
+ * A popup notification.
+ *
+ * _Key Responsibilities_
+ *
+ * * Display push notifications while the app runs in the foreground.
+ */
+
 class PopupNotification(private val activity: Activity) {
     private lateinit var body: String
     private lateinit var title: String
