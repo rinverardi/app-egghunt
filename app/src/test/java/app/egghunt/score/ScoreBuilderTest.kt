@@ -10,6 +10,10 @@ import io.mockk.mockk
 import org.junit.Test
 import org.skyscreamer.jsonassert.JSONAssert
 
+/**
+ * A unit test for the score builder.
+ */
+
 internal class ScoreBuilderTest {
     private val context = mockk<Context>().also { context ->
         every { context.resources } returns mockk<Resources>().also { resources ->
@@ -21,11 +25,33 @@ internal class ScoreBuilderTest {
         }
     }
 
+    /**
+     * Build the scores.
+     *
+     * * 'Fake hunter 1' scores gold.
+     * * 'Fake hunter 2' scores silver.
+     * * 'Fake hunter 3' scores bronze.
+     */
+
     @Test
     fun build() = doBuild("")
 
+    /**
+     * Build the scores.
+     *
+     * * 'Fake hunter 1' and 'fake hunter 2' share gold.
+     * * 'Fake hunter 3' scores bronze.
+     */
+
     @Test
     fun build_sharedGold() = doBuild("_sharedGold")
+
+    /**
+     * Build the scores.
+     *
+     * * 'Fake hunter 1' scores gold.
+     * * 'Fake hunter 2' and 'fake hunter 3' share silver.
+     */
 
     @Test
     fun build_sharedSilver() = doBuild("_sharedSilver")

@@ -8,7 +8,16 @@ import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
 
+/**
+ * A unit test for the QR code parser.
+ */
+
 internal class CodeParserTest {
+
+    /**
+     * Parse a valid competition code.
+     */
+
     @Test
     fun parse() {
         val codeString = "{" +
@@ -25,6 +34,10 @@ internal class CodeParserTest {
         assertNull(code.ht)
     }
 
+    /**
+     * Parse an invalid competition code (invalid description).
+     */
+
     @Test
     fun parse_invalidDescription() {
         var codeString = "{" +
@@ -40,6 +53,10 @@ internal class CodeParserTest {
         }
     }
 
+    /**
+     * Parse an invalid competition code (invalid tag).
+     */
+
     @Test
     fun parse_invalidTag() {
         var codeString = "{\"ct\":\"CCCCCC\"}"
@@ -53,6 +70,10 @@ internal class CodeParserTest {
         }
     }
 
+    /**
+     * Parse an invalid competition code (malformed).
+     */
+
     @Test
     fun parse_malformed() {
         var codeString = "{\"ct\":\"CCCCCC\"}"
@@ -65,6 +86,10 @@ internal class CodeParserTest {
             codeString += "X"
         }
     }
+
+    /**
+     * Parse a valid egg code.
+     */
 
     @Test
     fun parse_withEgg() {
@@ -83,6 +108,10 @@ internal class CodeParserTest {
         assertNull(code.ht)
     }
 
+    /**
+     * Parse a valid hunter code.
+     */
+
     @Test
     fun parse_withHunter() {
         val codeString = "{" +
@@ -99,6 +128,10 @@ internal class CodeParserTest {
         assertEquals("Fake Hunter", code.hd)
         assertEquals("HHHHHH", code.ht)
     }
+
+    /**
+     * Parse an invalid competition code (missing tag).
+     */
 
     @Test
     fun parse_withoutCompetition() {
