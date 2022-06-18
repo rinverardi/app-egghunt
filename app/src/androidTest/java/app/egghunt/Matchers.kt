@@ -13,26 +13,22 @@ import org.hamcrest.Matchers.anyOf
 import org.hamcrest.Matchers.instanceOf
 
 object Matchers {
-    fun activityTitle(): Matcher<View> {
-        return anyOf(
-            allOf(
-                instanceOf(TextView::class.java),
-                isDisplayed(),
-                withParent(withResourceName("action_bar"))
-            ),
-            allOf(
-                instanceOf(TextView::class.java),
-                isDisplayed(),
-                withParent(withId(R.id.toolbar))
-            )
-        )
-    }
-
-    fun upButton(): Matcher<View> {
-        return allOf(
-            instanceOf(ImageButton::class.java),
+    fun activityTitle(): Matcher<View> = anyOf(
+        allOf(
+            instanceOf(TextView::class.java),
+            isDisplayed(),
+            withParent(withResourceName("action_bar"))
+        ),
+        allOf(
+            instanceOf(TextView::class.java),
             isDisplayed(),
             withParent(withId(R.id.toolbar))
         )
-    }
+    )
+
+    fun upButton(): Matcher<View> = allOf(
+        instanceOf(ImageButton::class.java),
+        isDisplayed(),
+        withParent(withId(R.id.toolbar))
+    )
 }
