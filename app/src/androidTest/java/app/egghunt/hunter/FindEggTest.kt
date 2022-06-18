@@ -51,9 +51,9 @@ class FindEggTest {
             it.reset()
         }
 
-        val buttonHide = onView(allOf(withId(R.id.button_find)))
+        val buttonFind = onView(allOf(withId(R.id.button_find)))
 
-        buttonHide.perform(click())
+        buttonFind.perform(click())
 
         Intents.intended(hasComponent(ScanActivity::class.qualifiedName))
 
